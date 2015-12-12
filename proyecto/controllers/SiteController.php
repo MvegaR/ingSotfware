@@ -125,4 +125,134 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    public function actionCrearTViaje(){
+        $model = new TipoViajeForm;
+        $msg = null;
+        if($model->load(Yii::$app->request->post()))
+        {
+            if($model->validate())
+            {
+                $table = new TipoViaje;
+                $table->NOMBRE_TIPO_DE_VIAJE = $model->nombre_tipo_viaje;
+                $table->MONTO_MAXIMO = $model->monto_maximo;
+                if ($table->insert()){
+                    $msg = '<div class="alert alert-success" role="alert"><strong>Guardado!</strong> Tipo de viaje agregado correctamente.</div>';
+                    $model->nombre_tipo_viaje = null;
+                    $model->monto_maximo = null;
+                }else{
+                    $msg = '<div class="alert alert-danger" role="alert"><strong>Error!</strong> No se pudo agregar el Tipo de Viaje.</div>';
+                }
+                $table = new TipoViaje;
+                $model = $table->find()->all();
+                return $this->render("tipo-viaje", ["model" => $model, 'msg' => $msg]);
+            }
+            else{
+                $model->getErrors();
+            }
+        }
+        return $this->render("crear-tipo-viaje", ['model' => $model, 'msg' => $msg]);
+    }
+    
+    public function actionVerTViaje()
+    {
+        $table = new TipoViaje;
+        $msg = null;
+        $model = $table->find()->all();
+        return $this->render("tipo-viaje", ["model" => $model, 'msg' => $msg]);
+    }
+    
+    public function actionBorrarTViaje()
+    {
+        $msg = null;
+        if(Yii::$app->request->post())
+        {
+            $ID_TIPO_DE_VIAJE = Html::encode($_POST["ID_TIPO_DE_VIAJE"]);
+            if((int) $ID_TIPO_DE_VIAJE)
+            {
+                if(TipoViaje::deleteAll("ID_TIPO_DE_VIAJE=:ID_TIPO_DE_VIAJE", [":ID_TIPO_DE_VIAJE" => $ID_TIPO_DE_VIAJE]))
+                {
+                    
+                    $msg = '<div class="alert alert-success" role="alert"><strong>Eliminado!</strong> Tipo de viaje eliminado correctamente.</div>';
+                }
+                else
+                {
+                    $msg = '<div class="alert alert-danger" role="alert"><strong>Error!</strong> El Tipo de Viaje no se elimino.</div>';
+                }
+            }
+            else
+            {
+                $msg = '<div class="alert alert-danger" role="alert"><strong>Error!</strong> El Tipo de Viaje no se elimino.</div>';
+            }
+        }
+        $table = new TipoViaje;
+        $model = $table->find()->all();
+        return $this->render("tipo-viaje", ["model" => $model, 'msg' => $msg]);
+    }
+    
+    public function actionEditarTViaje()
+    {
+        $model = new TipoViajeForm;
+        $msg = null;
+        if($model->load(Yii::$app->request->post()))
+        {
+            if($model->validate())
+            {
+                $table = TipoViaje::findOne($model->id_tipo_viaje);
+                
+                if($table)
+                {
+                    $table->NOMBRE_TIPO_DE_VIAJE = $model->nombre_tipo_viaje;
+                    $table->MONTO_MAXIMO = $model->monto_maximo;
+                    if ($table->update())
+                    {
+                        $msg = '<div class="alert alert-success" role="alert"><strong>Modificado!</strong> El Tipo de Viaje fue modificado.</div>';
+                    }
+                    else
+                    {
+                        $msg = '<div class="alert alert-warning" role="alert"><strong>Peligro!</strong> El tipo de viaje no se modifico.</div>';
+                    }
+                }
+                else
+                {
+                    $msg = '<div class="alert alert-danger" role="alert"><strong>Error!</strong> Tipo de Viaje no encontrado.</div>';
+                }
+                $model = $table->find()->all();
+                return $this->render("tipo-viaje", ["model" => $model, 'msg' => $msg]);
+            }
+            else
+            {
+                $model->getErrors();
+            }
+        }
+        
+        if (Yii::$app->request->get("ID_TIPO_DE_VIAJE"))
+        {
+            $ID_TIPO_DE_VIAJE = Html::encode($_GET["ID_TIPO_DE_VIAJE"]);
+            if ((int) $ID_TIPO_DE_VIAJE)
+            {
+                $table = TipoViaje::findOne($ID_TIPO_DE_VIAJE);
+                if($table)
+                {
+                    $model->id_tipo_viaje = $table->ID_TIPO_DE_VIAJE;
+                    $model->nombre_tipo_viaje = $table->NOMBRE_TIPO_DE_VIAJE;
+                    $model->monto_maximo = $table->MONTO_MAXIMO;
+                }
+                else
+                {
+                    return $this->redirect(["site/tipo-viaje"]);
+                }
+            }
+            else
+            {
+                return $this->redirect(["site/tipo-viaje"]);
+            }
+        }
+        else
+        {
+            return $this->redirect(["site/tipo-viaje"]);
+        }
+        return $this->render("editar-tipo-viaje", ["model" => $model, "msg" => $msg]);
+    }
+
 }
