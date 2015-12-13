@@ -1,121 +1,141 @@
 <?php
-
 namespace app\controllers;
 
 use Yii;
-use app\models\Usuario;
-use app\models\UsuarioSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\LoginForm;
+use app\models\ContactForm;
+use yii\db\Connection;
 
-/**
- * UsuarioController implements the CRUD actions for Usuario model.
- */
-class UsuarioController extends Controller
-{
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-        ];
-    }
+use app\models\Usuario;
+use app\models\UsuarioTabla;
+use yii\helpers\Url;
+use yii\helpers\Html;
 
-    /**
-     * Lists all Usuario models.
-     * @return mixed
-     */
-    public function actionIndex()
-    {
-        $searchModel = new UsuarioSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
 
-    /**
-     * Displays a single Usuario model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
+class UsuarioController extends controller{
 
-    /**
-     * Creates a new Usuario model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Usuario();
+	public function actionView(){
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
-    }
+		$tabla = new Usuario();
+		return $this -> render("View", ["model" => $tabla -> find() -> all()] );
+	}
 
-    /**
-     * Updates an existing Usuario model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
+	public function actionUpdate(){
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
-    }
+		$models = new Usuario();
+		$msg = null;
 
-    /**
-     * Deletes an existing Usuario model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
+		if($models -> load(Yii::$app->request->post())){
+			if($models -> validate()){
+				$tabla = UsuarioTabla::findOne($_GET["id_usuario"]);
+				if($tabla){
+					$tabla -> NOMBRE_USUARIO = $models -> nombre_usuario;
+					$tabla -> ID_DEPARTAMENTO = $models -> id_departamento;
+					$tabla -> ROL = $models -> rol;
+					$tabla -> EMAIL = $models -> email;
+					if($tabla -> PASSWORD != $models -> password){
+						$tabla -> PASSWORD = sha1($models -> password);
+					}
 
-        return $this->redirect(['index']);
-    }
+					if($tabla -> update()){
+						$msg = "Usuario actualizado correctamente.";
+					}else{
+						$msg = "Error al actualizar.";
+					
+					}
+				}else{
+					$msg = "Usuario no encontrado.";
+				}
 
-    /**
-     * Finds the Usuario model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Usuario the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
-    {
-        if (($model = Usuario::findOne($id)) !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
-    }
+			}
+
+		}
+
+
+		if(Yii::$app -> request -> get("id_usuario")){
+			$id_usuario = Html::encode($_GET["id_usuario"]);
+			if((int) $id_usuario){
+				$tabla = UsuarioTabla::findOne($id_usuario);
+				if($tabla){
+					$models -> id_usuario = $tabla -> ID_USUARIO;
+					$models -> nombre_usuario = $tabla -> NOMBRE_USUARIO;
+					$models -> id_departamento = $tabla -> ID_DEPARTAMENTO;
+					$models -> rol = $tabla -> ROL;
+					$models -> email = $tabla -> EMAIL;
+					$models -> password = $tabla -> PASSWORD;
+					$models -> password_repeat = $tabla -> PASSWORD;
+
+				}else{
+					return $this->redirect(["usuario/view"]);
+				}
+
+			}else{
+				return $this->redirect(["usuario/view"]);
+			}
+		}else{
+			return $this->redirect(["usuario/view"]);
+		}
+
+		return $this -> render("Update", ["models" => $models, "msg" => $msg]);
+	}
+
+	public function actionDelete(){
+
+		if(Yii::$app -> request -> post()){
+			$id = Html::encode($_POST["ID_USUARIO"]);
+			if((int) $id){
+				if(UsuarioTabla::deleteAll("ID_USUARIO = :id",[":id" => $id])){
+					return $this -> redirect((["usuario/view"]));
+				}else{
+					echo "Ha ocurrido un error al eliminar.";
+					echo "<meta html-equiv='refresh' content='3;".Url::toRoute("usuario/view")."'>";
+				}
+			}else{
+				echo "Ha ocurrido un error al eliminar.";
+				echo "<meta html-equiv='refresh' content='3;".Url::toRoute("usuario/view")."'>";
+			}
+
+		}else{
+
+			return $this -> redirect((["usuario/view"]));
+		}
+
+	}
+
+
+	public function actionCreate(){
+		$models = new Usuario();
+		$msg = null;
+
+		if($models-> load(Yii::$app->request->post())){
+			if($models -> validate()){
+				$table = new UsuarioTabla;
+				$table -> NOMBRE_USUARIO = $models -> nombre_usuario;
+				$table -> ID_DEPARTAMENTO = $models -> id_departamento;
+				$table -> ROL = $models -> rol;
+				$table -> EMAIL = $models -> email;
+				$table -> PASSWORD = sha1($models -> password);
+				$table -> ID_USUARIO = null;
+				$table -> AUTHKEY = "asdf";
+				$table -> ACCESSTOKEN = "asdf";
+				if($table -> insert()){
+					$msg = "Registro insertado correctamente";
+					$models = new Usuario();
+				}else{
+					$msg = "Error al insertar registro";
+				}
+			}
+		}else{
+			$models -> getErrors();
+		}
+
+		return $this->render("Create",["models" => $models,"msg" => $msg]);
+	}
+
 }
+
+?>

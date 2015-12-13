@@ -1,21 +1,38 @@
 <?php
-
+use yii\helpers\Url;
 use yii\helpers\Html;
-
-/* @var $this yii\web\View */
-/* @var $model app\models\Usuario */
-
-$this->title = 'Update Usuario: ' . ' ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Usuarios', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+use yii\widgets\ActiveForm;
+$this->title = 'Editar usuario';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="usuario-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<a href="<?= Url::toRoute("usuario/view") ?>" > Ver lista de usuarios.</a>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+<h1>Editar usuario con id <?= Html::encode($_GET["id_usuario"]) ?> </h1>
 
-</div>
+<h3> <?= $msg ?> </h3>
+
+<?php
+	$form = ActiveForm::begin(["method" => "post",
+    'enableClientValidation' => true,]
+);
+?>
+
+<?= $form -> field($models, "id_usuario") -> input("hidden") -> label(false); ?>
+
+<?= $form -> field($models, "nombre_usuario") -> input("text"); ?>
+
+<?= $form -> field($models, "id_departamento") -> input("text"); ?>
+
+<?= $form -> field($models, "rol") -> input("text"); ?>
+
+<?= $form -> field($models, "email") -> input("email"); ?>
+
+<?= $form -> field($models, "password") -> input("password"); ?>
+
+<?= $form -> field($models, "password_repeat") -> input("password"); ?>
+
+
+<?= Html::submitButton("Editar usuario", ["class" => "btn btn-primary"]);?>
+
+<?php $form -> end(); ?>
