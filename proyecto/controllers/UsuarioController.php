@@ -42,13 +42,13 @@ class UsuarioController extends controller{
 					}
 
 					if($tabla -> update()){
-						$msg = "Usuario actualizado correctamente.";
+						$msg = '<div class="alert alert-success" role="alert">Usuario actualizado correctamente.</div>';
 					}else{
-						$msg = "Error al actualizar.";
+						$msg = '<div class="alert alert-danger" role="alert">Error al actualizar</div>';
 					
 					}
 				}else{
-					$msg = "Usuario no encontrado.";
+					$msg = '<div class="alert alert-warning" role="alert">Usuario no encontrado.</div>';
 				}
 
 			}
@@ -126,10 +126,10 @@ class UsuarioController extends controller{
 				$table -> AUTHKEY = "asdf";
 				$table -> ACCESSTOKEN = "asdf";
 				if($table -> insert()){
-					$msg = "Registro insertado correctamente";
+					$msg = '<div class="alert alert-success" role="alert">Registro insertado correctamente</div>';
 					$models = new Usuario();
 				}else{
-					$msg = "Error al insertar registro";
+					$msg = '<div class="alert alert-danger" role="alert">Error al insertar registro</div>';
 				}
 			}
 		}else{

@@ -9,9 +9,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <a href="<?= Url::toRoute("usuario/view") ?>" > Ver lista de usuarios.</a>
 
-<h1>Editar usuario con id <?= Html::encode($_GET["id_usuario"]) ?> </h1>
-
 <h3> <?= $msg ?> </h3>
+
+<h1>Editar usuario con id <?= Html::encode($_GET["id_usuario"]) ?> </h1>
 
 <?php
 	$form = ActiveForm::begin(["method" => "post",

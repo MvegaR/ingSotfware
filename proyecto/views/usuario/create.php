@@ -12,9 +12,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <a href="<?= Url::toRoute("usuario/view")?>">Ver lista de usuarios.</a>
 
-<h1> Crear Usuario </h1>
-
 <h3> <?= $msg ?></h3>
+
+<h1> Crear Usuario </h1>
 
 <?php
 	$form = ActiveForm::begin(
