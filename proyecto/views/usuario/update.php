@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use himiklab\yii2\recaptcha\ReCaptcha;
 $this->title = 'Editar usuario';
+$this -> params['breadcrumbs'][] = ["label" => "Lista de usuarios", "url" => ["usuario/view"]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

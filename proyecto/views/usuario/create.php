@@ -6,6 +6,7 @@ use yii\helpers\Url;
 use himiklab\yii2\recaptcha\ReCaptcha;
 
 $this->title = 'Crear usuario';
+$this -> params['breadcrumbs'][] = ["label" => "Lista de usuarios", "url" => ["usuario/view"]];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

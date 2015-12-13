@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = 'Declaración y solicitud de viajes';
 ?>
 <div class="site-index">
 

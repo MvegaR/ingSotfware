@@ -11,6 +11,7 @@ use yii\db\Connection;
 
 use app\models\Usuario;
 use app\models\UsuarioTabla;
+use app\models\DepartamentoTabla;
 use yii\helpers\Url;
 use yii\helpers\Html;
 
@@ -139,6 +140,14 @@ class UsuarioController extends controller{
 		return $this->render("Create",["models" => $models,"msg" => $msg]);
 	}
 
+	public function actionViewdep(){
+		$tabla = new DepartamentoTabla;
+		return $this -> render("ViewDepartamentos", ["model" => $tabla -> find() -> all()]);
+	}
+
 }
+
+
+
 
 ?>

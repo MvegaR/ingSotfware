@@ -27,7 +27,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Declaración y solicitud de viajes.',
+        'brandLabel' => 'Declaración y solicitud de viajes',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -36,15 +36,15 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'Inicio', 'url' => ['/site/index']],
             ['label' => 'Gestion usuarios', 'url' => ['/usuario/view']],
             ['label' => 'Gestion Tipos Viaje', 'url' => ['/site/ver-t-viaje']],
            # ['label' => 'About', 'url' => ['/site/about']],
             # ['label' => 'Contact', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ?
-                ['label' => 'Login', 'url' => ['/site/login']] :
+                ['label' => 'Iniciar sesión', 'url' => ['/site/login']] :
                 [
-                    'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+                    'label' => 'Salir (' . Yii::$app->user->identity->username . ')',
                     'url' => ['/site/logout'],
                     'linkOptions' => ['data-method' => 'post']
                 ],

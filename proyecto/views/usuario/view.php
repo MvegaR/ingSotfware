@@ -6,7 +6,7 @@ $this->title = 'Lista de usuarios';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<a href="<?= Url::toRoute("usuario/create")?>">Crear usuario</a>
+<a href="<?= Url::toRoute("usuario/create")?>">Crear usuario</a> | <a href="<?= Url::toRoute("usuario/viewdep")?>">Ver departamentos</a>
 
 <h3> Lista de usuarios </h3>
 <div class="panel panel-default">
