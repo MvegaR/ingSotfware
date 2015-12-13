@@ -3,6 +3,7 @@
 use yii\helpers\HTML;
 use yii\widgets\ActiveForm;
 use yii\helpers\Url;
+use himiklab\yii2\recaptcha\ReCaptcha;
 
 $this->title = 'Crear usuario';
 $this->params['breadcrumbs'][] = $this->title;
@@ -34,6 +35,8 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?= $form -> field($models, "password") -> input("password"); ?>
 
 	<?= $form -> field($models, "password_repeat") -> input("password"); ?>
+
+	<?= $form->field($models, 'reCaptcha')->widget(ReCaptcha::className()) ?>
 
 
 <?= Html::submitButton("Crear usuario", ["class" => "btn btn-primary"]);?>

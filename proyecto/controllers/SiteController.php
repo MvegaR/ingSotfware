@@ -9,8 +9,13 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use yii\db\Connection;
+//inicio cosas gestion tipo viaje
+use app\models\TipoViajeForm;
+use app\models\TipoViaje;
+use yii\helpers\Html;
+//fin cosas gestion tipo viaje
 
-use mPDF; //Para el PDF!!!!!!!!!!!!!!!!!!
+use mPDF; //Para el PDF
 
 class SiteController extends Controller
 {
@@ -24,23 +29,23 @@ class SiteController extends Controller
         $mpdf = new mPDF;
         
        	$connection = new \yii\db\Connection(Yii::$app->db);
-       	$connection->open();
+       	$connection -> open();
        	$sql = "Select * from usuario";
-       	$command=$connection->createCommand($sql);
-       	$dataReader=$command->query();
+       	$command = $connection -> createCommand($sql);
+       	$dataReader = $command -> query();
        	$str = "<table> <tbody>";
        	foreach($dataReader as $row) { 
        		$str = $str."<tr>";
        		foreach ($row as $col) {
-       			$str= $str."<td>".$col."</td>";
+       			$str = $str."<td>".$col."</td>";
        		}
        		$str = $str."</tr>";
        	}
        	$str = $str."</tbody></table>";
        	
-        $mpdf->WriteHTML($str);
-        $mpdf->Output();
-        $connection->close();
+        $mpdf -> WriteHTML($str);
+        $mpdf -> Output();
+        $connection -> close();
         exit;
 	}
 	
@@ -254,5 +259,4 @@ class SiteController extends Controller
         }
         return $this->render("editar-tipo-viaje", ["model" => $model, "msg" => $msg]);
     }
-
 }

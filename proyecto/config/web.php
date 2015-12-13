@@ -4,6 +4,7 @@ $params = require(__DIR__ . '/params.php');
 
 $config = [
     'id' => 'basic',
+    'language' => 'es',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'components' => [
@@ -28,6 +29,12 @@ $config = [
             // for the mailer to send real emails.
             'useFileTransport' => true,
         ],
+        'reCaptcha' => [
+            'name' => 'reCaptcha',
+            'class' => 'himiklab\yii2\recaptcha\ReCaptcha',
+            'siteKey' => '6LfD6hITAAAAAGcfqyVwxtpOnvUHXsYWrv0pSgnJ',
+            'secret' => '6LfD6hITAAAAAEdV6MQ8zDX3emwQY4bVYyw-L3nz',
+        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -38,6 +45,7 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
+
     ],
     'params' => $params,
 ];

@@ -20,7 +20,7 @@ class UsuarioController extends controller{
 
 	public function actionView(){
 
-		$tabla = new Usuario();
+		$tabla = new UsuarioTabla();
 		return $this -> render("View", ["model" => $tabla -> find() -> all()] );
 	}
 
@@ -70,13 +70,16 @@ class UsuarioController extends controller{
 					$models -> password_repeat = $tabla -> PASSWORD;
 
 				}else{
+					$msg = "Tabla no encontrada";
 					return $this->redirect(["usuario/view"]);
 				}
 
 			}else{
+				$msg = "ID no valido";
 				return $this->redirect(["usuario/view"]);
 			}
 		}else{
+			
 			return $this->redirect(["usuario/view"]);
 		}
 
