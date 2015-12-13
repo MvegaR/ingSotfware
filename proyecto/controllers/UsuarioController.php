@@ -27,19 +27,19 @@ class UsuarioController extends controller{
 
 	public function actionUpdate(){
 
-		$models = new Usuario();
+		$model = new Usuario();
 		$msg = null;
 
-		if($models -> load(Yii::$app->request->post())){
-			if($models -> validate()){
+		if($model -> load(Yii::$app->request->post())){
+			if($model -> validate()){
 				$tabla = UsuarioTabla::findOne($_GET["id_usuario"]);
 				if($tabla){
-					$tabla -> NOMBRE_USUARIO = $models -> nombre_usuario;
-					$tabla -> ID_DEPARTAMENTO = $models -> id_departamento;
-					$tabla -> ROL = $models -> rol;
-					$tabla -> EMAIL = $models -> email;
-					if($tabla -> PASSWORD != $models -> password){
-						$tabla -> PASSWORD = sha1($models -> password);
+					$tabla -> NOMBRE_USUARIO = $model -> nombre_usuario;
+					$tabla -> ID_DEPARTAMENTO = $model -> id_departamento;
+					$tabla -> ROL = $model -> rol;
+					$tabla -> EMAIL = $model -> email;
+					if($tabla -> PASSWORD != $model -> password){
+						$tabla -> PASSWORD = sha1($model -> password);
 					}
 
 					if($tabla -> update()){
@@ -62,13 +62,13 @@ class UsuarioController extends controller{
 			if((int) $id_usuario){
 				$tabla = UsuarioTabla::findOne($id_usuario);
 				if($tabla){
-					$models -> id_usuario = $tabla -> ID_USUARIO;
-					$models -> nombre_usuario = $tabla -> NOMBRE_USUARIO;
-					$models -> id_departamento = $tabla -> ID_DEPARTAMENTO;
-					$models -> rol = $tabla -> ROL;
-					$models -> email = $tabla -> EMAIL;
-					$models -> password = $tabla -> PASSWORD;
-					$models -> password_repeat = $tabla -> PASSWORD;
+					$model -> id_usuario = $tabla -> ID_USUARIO;
+					$model -> nombre_usuario = $tabla -> NOMBRE_USUARIO;
+					$model -> id_departamento = $tabla -> ID_DEPARTAMENTO;
+					$model -> rol = $tabla -> ROL;
+					$model -> email = $tabla -> EMAIL;
+					$model -> password = $tabla -> PASSWORD;
+					$model -> password_repeat = $tabla -> PASSWORD;
 
 				}else{
 					$msg = "Tabla no encontrada";
@@ -84,7 +84,7 @@ class UsuarioController extends controller{
 			return $this->redirect(["usuario/view"]);
 		}
 
-		return $this -> render("Update", ["models" => $models, "msg" => $msg]);
+		return $this -> render("Update", ["model" => $model, "msg" => $msg]);
 	}
 
 	public function actionDelete(){
@@ -112,38 +112,40 @@ class UsuarioController extends controller{
 
 
 	public function actionCreate(){
-		$models = new Usuario();
+		$model = new Usuario();
 		$msg = null;
 
-		if($models-> load(Yii::$app->request->post())){
-			if($models -> validate()){
+		if($model-> load(Yii::$app->request->post())){
+			if($model -> validate()){
 				$table = new UsuarioTabla;
-				$table -> NOMBRE_USUARIO = $models -> nombre_usuario;
-				$table -> ID_DEPARTAMENTO = $models -> id_departamento;
-				$table -> ROL = $models -> rol;
-				$table -> EMAIL = $models -> email;
-				$table -> PASSWORD = sha1($models -> password);
+				$table -> NOMBRE_USUARIO = $model -> nombre_usuario;
+				$table -> ID_DEPARTAMENTO = $model -> id_departamento;
+				$table -> ROL = $model -> rol;
+				$table -> EMAIL = $model -> email;
+				$table -> PASSWORD = sha1($model -> password);
 				$table -> ID_USUARIO = null;
 				$table -> AUTHKEY = "asdf";
 				$table -> ACCESSTOKEN = "asdf";
 				if($table -> insert()){
 					$msg = '<div class="alert alert-success" role="alert">Registro insertado correctamente</div>';
-					$models = new Usuario();
+					$model = new Usuario();
 				}else{
 					$msg = '<div class="alert alert-danger" role="alert">Error al insertar registro</div>';
 				}
 			}
 		}else{
-			$models -> getErrors();
+			$model -> getErrors();
 		}
 
-		return $this->render("Create",["models" => $models,"msg" => $msg]);
+		return $this->render("Create",["model" => $model,"msg" => $msg]);
 	}
 
 	public function actionViewdep(){
 		$tabla = new DepartamentoTabla;
 		return $this -> render("ViewDepartamentos", ["model" => $tabla -> find() -> all()]);
 	}
+
+	#public function
 
 }
 

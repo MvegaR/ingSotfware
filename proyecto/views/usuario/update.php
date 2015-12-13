@@ -20,21 +20,21 @@ $this->params['breadcrumbs'][] = $this->title;
 );
 ?>
 
-<?= $form -> field($models, "id_usuario") -> input("hidden") -> label(false); ?>
+<?= $form -> field($model, "id_usuario") -> input("hidden") -> label(false); ?>
 
-<?= $form -> field($models, "nombre_usuario") -> input("text"); ?>
+<?= $form -> field($model, "nombre_usuario") -> input("text"); ?>
 
-<?= $form -> field($models, "id_departamento") -> input("text"); ?>
+<?= $form -> field($model, "id_departamento") -> input("text"); ?>
 
-<?= $form -> field($models, "rol") -> input("text"); ?>
+<?= $form -> field($model, "rol") -> input("text"); ?>
 
-<?= $form -> field($models, "email") -> input("email"); ?>
+<?= $form -> field($model, "email") -> input("email"); ?>
 
-<?= $form -> field($models, "password") -> input("password"); ?>
+<?= $form -> field($model, "password") -> input("password"); ?>
 
-<?= $form -> field($models, "password_repeat") -> input("password"); ?>
+<?= $form -> field($model, "password_repeat") -> input("password"); ?>
 
-<?= $form -> field($models, 'reCaptcha')->widget(ReCaptcha::className()) ?>
+<?= $form -> field($model, 'reCaptcha')->widget(ReCaptcha::className()) ?>
 
 
 <?= Html::submitButton("Editar usuario", ["class" => "btn btn-primary"]);?>
