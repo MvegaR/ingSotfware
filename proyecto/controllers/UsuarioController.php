@@ -12,6 +12,7 @@ use yii\db\Connection;
 use app\models\Usuario;
 use app\models\UsuarioTabla;
 use app\models\DepartamentoTabla;
+use app\models\DepartamentoForm;
 use yii\helpers\Url;
 use yii\helpers\Html;
 
@@ -34,7 +35,7 @@ class UsuarioController extends controller{
 			if($model -> validate()){
 				$tabla = UsuarioTabla::findOne($_GET["id_usuario"]);
 				if($tabla){
-					$tabla -> NOMBRE_USUARIO = $model -> nombre_usuario;
+					$tabla -> NOMBRE_USUARIO = $model -> NOMBRE_USUARIO;
 					$tabla -> ID_DEPARTAMENTO = $model -> id_departamento;
 					$tabla -> ROL = $model -> rol;
 					$tabla -> EMAIL = $model -> email;
@@ -46,7 +47,6 @@ class UsuarioController extends controller{
 						$msg = '<div class="alert alert-success" role="alert">Usuario actualizado correctamente.</div>';
 					}else{
 						$msg = '<div class="alert alert-danger" role="alert">Error al actualizar</div>';
-					
 					}
 				}else{
 					$msg = '<div class="alert alert-warning" role="alert">Usuario no encontrado.</div>';
@@ -63,27 +63,23 @@ class UsuarioController extends controller{
 				$tabla = UsuarioTabla::findOne($id_usuario);
 				if($tabla){
 					$model -> id_usuario = $tabla -> ID_USUARIO;
-					$model -> nombre_usuario = $tabla -> NOMBRE_USUARIO;
+					$model -> NOMBRE_USUARIO = $tabla -> NOMBRE_USUARIO;
 					$model -> id_departamento = $tabla -> ID_DEPARTAMENTO;
 					$model -> rol = $tabla -> ROL;
-					$model -> email = $tabla -> EMAIL;
+					$model -> EMAIL = $tabla -> EMAIL;
 					$model -> password = $tabla -> PASSWORD;
 					$model -> password_repeat = $tabla -> PASSWORD;
-
 				}else{
 					$msg = "Tabla no encontrada";
 					return $this->redirect(["usuario/view"]);
 				}
-
 			}else{
 				$msg = "ID no valido";
 				return $this->redirect(["usuario/view"]);
 			}
 		}else{
-			
 			return $this->redirect(["usuario/view"]);
 		}
-
 		return $this -> render("Update", ["model" => $model, "msg" => $msg]);
 	}
 
@@ -104,7 +100,6 @@ class UsuarioController extends controller{
 			}
 
 		}else{
-
 			return $this -> redirect((["usuario/view"]));
 		}
 
@@ -118,10 +113,10 @@ class UsuarioController extends controller{
 		if($model-> load(Yii::$app->request->post())){
 			if($model -> validate()){
 				$table = new UsuarioTabla;
-				$table -> NOMBRE_USUARIO = $model -> nombre_usuario;
+				$table -> NOMBRE_USUARIO = $model -> NOMBRE_USUARIO;
 				$table -> ID_DEPARTAMENTO = $model -> id_departamento;
 				$table -> ROL = $model -> rol;
-				$table -> EMAIL = $model -> email;
+				$table -> EMAIL = $model -> EMAIL;
 				$table -> PASSWORD = sha1($model -> password);
 				$table -> ID_USUARIO = null;
 				$table -> AUTHKEY = "asdf";
@@ -137,7 +132,7 @@ class UsuarioController extends controller{
 			$model -> getErrors();
 		}
 
-		return $this->render("Create",["model" => $model,"msg" => $msg]);
+		return $this->render("Create",["model" => $model, "msg" => $msg]);
 	}
 
 	public function actionViewdep(){
@@ -145,7 +140,29 @@ class UsuarioController extends controller{
 		return $this -> render("ViewDepartamentos", ["model" => $tabla -> find() -> all()]);
 	}
 
-	#public function
+	public function actionCreatedep(){
+		$model = new DepartamentoForm;
+		$msg = null;
+
+		if($model -> load(Yii::$app -> request -> post())){
+			if($model -> validate()){
+				$tabla = new DepartamentoTabla;
+				$tabla -> NOMBRE_DEPARTAMENTO = $model -> NOMBRE_DEPARTAMENTO;
+				if($tabla -> insert()){
+					$msg = '<div class="alert alert-success" role="alert">Registro insertado correctamente</div>';
+					$model = new DepartamentoForm;
+				}else{
+					$msg = '<div class="alert alert-danger" role="alert">Error al insertar registro</div>';
+				}
+			}
+
+		}else{
+			$model -> getErrors();
+		}
+
+
+		return $this -> render("CreateDep", ["model" => $model, "msg" => $msg]);
+	}
 
 }
 

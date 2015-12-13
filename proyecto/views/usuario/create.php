@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <a href="<?= Url::toRoute("usuario/view")?>">Ver lista de usuarios.</a>
 
-<h3> <?= $msg ?></h3>
+<h5> <?= $msg ?></h5>
 
 <h1> Crear Usuario </h1>
 
@@ -25,13 +25,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-	<?= $form -> field($model, "nombre_usuario") -> input("text"); ?>
+	<?= $form -> field($model, "NOMBRE_USUARIO") -> input("text"); ?>
 
 	<?= $form -> field($model, "id_departamento") -> input("text"); ?>
 
 	<?= $form -> field($model, "rol") -> input("text"); ?>
 
-	<?= $form -> field($model, "email") -> input("email"); ?>
+	<?= $form -> field($model, "EMAIL") -> input("email"); ?>
 
 	<?= $form -> field($model, "password") -> input("password"); ?>
 

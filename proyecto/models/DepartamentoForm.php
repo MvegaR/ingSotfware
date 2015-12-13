@@ -1,20 +1,33 @@
 <?php
 namespace app\models;
-use yii\base\Model;
+use yii\db\ActiveRecord;
+use yii\base\model;
 use himiklab\yii2\recaptcha\ReCaptchaValidator;
 
 
-class DepartamentoForm extends Model{
+class DepartamentoForm extends ActiveRecord{
 
-	$nombre_departamento;
-	$reCaptcha;
+	
+	public $reCaptcha;
+
+	public static function tableName(){
+
+		return "DEPARTAMENTO";
+	}
 	
 	public function rules(){
 		return [
-		["nombre_departamento", "required", "message" => "Nombre departamento"],
-		["nombre_departamento"], "string", "message" => "Debe de ser una cadena de texto"],
+		["NOMBRE_DEPARTAMENTO", "required", "message" => "Ingrese nombre departamento"],
+		#["NOMBRE_DEPARTAMENTO", "match", "pattern" => "/^[!\"#$%&/(/)=?¡¿¨~'\\*<\+\-\{\}\[\]>,.;@|°¬]/+$", "not" => true, "message"=> "Caracteres no permitidos: ! \ \" # $ % & / ( ) = ? ¡ ¿ ¨ ~ ' \ * - < +  - [ ] { } > , . ; @ | ° ¬"],
+		["NOMBRE_DEPARTAMENTO", "match", "pattern" => "/^[a-záéíóúñ\s]+$/i", "message" => "Solo se aceptan letras"],
+		["NOMBRE_DEPARTAMENTO", "unique", "message" => "Departamento ya existe"],
+		["NOMBRE_DEPARTAMENTO", "string", "message" => "Debe de ser una cadena de texto"],
 		[['reCaptcha'], ReCaptchaValidator::className(), 'secret' => '6LfD6hITAAAAAEdV6MQ8zDX3emwQY4bVYyw-L3nz' ],
 		];
+	}
+
+	public function attributeLabels(){
+		return ["reCaptcha" => "Verifique su humanidad"];
 	}
 
 

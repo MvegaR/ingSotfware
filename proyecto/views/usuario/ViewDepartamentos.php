@@ -10,7 +10,7 @@ $this -> params['breadcrumbs'][] = $this -> title;
 ?>
 
 
-<a href = "#" > Crear Departamento </a>
+<a href = "<?= Url::toRoute("usuario/createdep") ?>" > Crear Departamento </a>
 
 <h3> Lista de Departamentos </h3>
 <div class ="table">
