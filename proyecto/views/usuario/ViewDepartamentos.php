@@ -18,7 +18,7 @@ $this -> params['breadcrumbs'][] = $this -> title;
 	<tr>
 		<th>ID</th>
 		<th>Nombre</th>
-		<th>Funciones</th>
+		<th> </th>
 	</tr>
 <?php foreach($model as $dep){?>
 	<tr>

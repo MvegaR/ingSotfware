@@ -37,8 +37,8 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Inicio', 'url' => ['/site/index']],
-            ['label' => 'Gestion usuarios', 'url' => ['/usuario/view']],
-            ['label' => 'Gestion Tipos Viaje', 'url' => ['/site/ver-t-viaje']],
+            ['label' => 'Gestión usuarios', 'url' => ['/usuario/view']],
+            ['label' => 'Gestión Tipos Viaje', 'url' => ['/site/ver-t-viaje']],
            # ['label' => 'About', 'url' => ['/site/about']],
             # ['label' => 'Contact', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ?

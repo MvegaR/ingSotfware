@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<th>Rol</th>
 	<th>ID Departamento</th>
 	<th>E-mail</th>
-	<th>Funciones</th>
+	<th> </th>
 </tr>
 </thead>
 <tbody>
