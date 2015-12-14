@@ -38,7 +38,7 @@ class UsuarioController extends controller{
 					$tabla -> NOMBRE_USUARIO = $model -> NOMBRE_USUARIO;
 					$tabla -> ID_DEPARTAMENTO = $model -> id_departamento;
 					$tabla -> ROL = $model -> rol;
-					$tabla -> EMAIL = $model -> email;
+					$tabla -> EMAIL = $model -> EMAIL;
 					if($tabla -> PASSWORD != $model -> password){
 						$tabla -> PASSWORD = sha1($model -> password);
 					}
@@ -46,7 +46,7 @@ class UsuarioController extends controller{
 					if($tabla -> update()){
 						$msg = '<div class="alert alert-success" role="alert">Usuario actualizado correctamente.</div>';
 					}else{
-						$msg = '<div class="alert alert-danger" role="alert">Error al actualizar</div>';
+						$msg = '<div class="alert alert-danger" role="alert">Error al actualizar o no existen cambios</div>';
 					}
 				}else{
 					$msg = '<div class="alert alert-warning" role="alert">Usuario no encontrado.</div>';
@@ -201,7 +201,7 @@ class UsuarioController extends controller{
 					if($tabla -> update()){
 						$msg = '<div class="alert alert-success" role="alert">Departamento actualizado correctamente.</div>';
 					}else{
-						$msg = '<div class="alert alert-danger" role="alert">Error al actualizar</div>';
+						$msg = '<div class="alert alert-danger" role="alert">Error al actualizar o no existen cambios</div>';
 					}
 				}else{
 					$msg = '<div class="alert alert-warning" role="alert">Departamento no encontrado.</div>';
