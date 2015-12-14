@@ -164,7 +164,78 @@ class UsuarioController extends controller{
 		return $this -> render("CreateDep", ["model" => $model, "msg" => $msg]);
 	}
 
+	public function actionDeletedep(){
+
+		if(Yii::$app -> request -> post()){
+			$id = Html::encode($_POST["ID_DEPARTAMENTO"]);
+			if((int) $id){
+				if(DepartamentoTabla::deleteAll("ID_DEPARTAMENTO = :id",[":id" => $id])){
+					return $this -> redirect((["usuario/viewdep"]));
+				}else{
+					echo "Ha ocurrido un error al eliminar.";
+					echo "<meta html-equiv='refresh' content='3;".Url::toRoute("usuario/viewdep")."'>";
+				}
+			}else{
+				echo "Ha ocurrido un error al eliminar.";
+				echo "<meta html-equiv='refresh' content='3;".Url::toRoute("usuario/viewdep")."'>";
+			}
+
+		}else{
+			return $this -> redirect((["usuario/viewdep"]));
+		}
+
+	}
+
+
+	public function actionUpdatedep(){
+
+		$model = new DepartamentoForm();
+		$msg = null;
+
+		if($model -> load(Yii::$app->request->post())){
+			if($model -> validate()){
+				$tabla = DepartamentoTabla::findOne($_GET["id_departamento"]);
+				if($tabla){
+					$tabla -> NOMBRE_DEPARTAMENTO = $model -> NOMBRE_DEPARTAMENTO;
+				
+					if($tabla -> update()){
+						$msg = '<div class="alert alert-success" role="alert">Departamento actualizado correctamente.</div>';
+					}else{
+						$msg = '<div class="alert alert-danger" role="alert">Error al actualizar</div>';
+					}
+				}else{
+					$msg = '<div class="alert alert-warning" role="alert">Departamento no encontrado.</div>';
+				}
+
+			}
+
+		}
+
+
+		if(Yii::$app -> request -> get("id_departamento")){
+			$id_departamento = Html::encode($_GET["id_departamento"]);
+			if((int) $id_departamento){
+				$tabla = DepartamentoTabla::findOne($id_departamento);
+				if($tabla){
+					
+					$model -> NOMBRE_DEPARTAMENTO = $tabla -> NOMBRE_DEPARTAMENTO;
+					
+				}else{
+					$msg = "Tabla no encontrada";
+					return $this->redirect(["usuario/viewdep"]);
+				}
+			}else{
+				$msg = "ID no valido";
+				return $this->redirect(["usuario/viewdep"]);
+			}
+		}else{
+			return $this->redirect(["usuario/viewdep"]);
+		}
+		return $this -> render("Updatedep", ["model" => $model, "msg" => $msg]);
+	}
+
 }
+	
 
 
 

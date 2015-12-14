@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?= $form -> field($model, "NOMBRE_DEPARTAMENTO") -> input("text"); ?>
 <?= $form->field($model, 'reCaptcha')->widget(ReCaptcha::className()) ?>
-<?= Html::submitButton("Crear departamento",["class" => "bnt bnt-primary"]); ?>
+<?= Html::submitButton("Crear departamento",["class" => "btn btn-primary"]); ?>
 
 
 
