@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?= $form -> field($model, "id_departamento") -> input("text"); ?>
 
-<?= $form -> field($model, "rol") -> input("text"); ?>
+<?= $form -> field($model, "rol") -> dropDownList(["docente" => "Docente","decano" => "Decano", "director" => "Director", "administrador" => "Admnistrador",]) ?>
 
 <?= $form -> field($model, "EMAIL") -> input("email"); ?>
 
