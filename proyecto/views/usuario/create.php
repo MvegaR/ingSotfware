@@ -30,8 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?= $form -> field($model, "NOMBRE_USUARIO") -> input("text"); ?>
 
 	<?= $form -> field($model, "id_departamento") -> dropDownList(
-			ArrayHelper::Map(DepartamentoTabla::find() -> all(),"ID_DEPARTAMENTO", "NOMBRE_DEPARTAMENTO" ), ["prompt" => "Seleccione departamento"] 
-		);?>
+			ArrayHelper::Map(DepartamentoTabla::find() -> all(), "ID_DEPARTAMENTO", "NOMBRE_DEPARTAMENTO" ), 
+			["prompt" => "Sin informar"] 
+			);
+	?>
 
 	<?= $form -> field($model, "rol") -> dropDownList(["docente" => "Docente","decano" => "Decano", "director" => "Director", "administrador" => "Admnistrador",]) ?>
 

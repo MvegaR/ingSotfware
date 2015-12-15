@@ -23,18 +23,18 @@
 		public function rules(){
 
 			return [
-						["NOMBRE_USUARIO", "required", "message" => "Compo requerido."],
+						["NOMBRE_USUARIO", "required", "message" => "Campo requerido."],
 						["NOMBRE_USUARIO", "string", "message" => "Debe de ser una cadena de texto"],
 						["NOMBRE_USUARIO", "unique", "on"=>"insert", "message" => "Usuario ya existe"],
 						["NOMBRE_USUARIO", "match", "pattern" => "/^[a-záéíóúñ\s]+$/i", "message" => "Solo se aceptan letras"],
 						["id_departamento", "integer", "message" => "Debe de ser un número"],
-						["rol", "required", "message" => "Compo requerido."],
-						["EMAIL", "required", "message" => "Compo requerido."],
+						["rol", "required", "message" => "Campo requerido."],
+						["EMAIL", "required", "message" => "Campo requerido."],
 						["EMAIL", "email", "message" => "Debe ser un Email valido."],
 						["EMAIL", "unique", "on" => "insert", "message" => "Email ya registrado"],
-						["password", "required", "message" => "Compo requerido."],
+						["password", "required", "message" => "Campo requerido."],
 						["password", "string", "message" => "Debe ingresar una cadena de texto."],
-						["password_repeat", "required", "message" => "Compo requerido."],
+						["password_repeat", "required", "message" => "Campo requerido."],
 						["password_repeat", "compare", "compareAttribute" => "password","message" => "No son iguales."],
 						[['reCaptcha'], ReCaptchaValidator::className(), 'secret' => '6LfD6hITAAAAAEdV6MQ8zDX3emwQY4bVYyw-L3nz' ],
 
