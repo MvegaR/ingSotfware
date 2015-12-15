@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Url;
 use yii\helpers\Html;
+use app\models\DepartamentoTabla;
 
 $this->title = 'Lista de usuarios';
 $this->params['breadcrumbs'][] = $this->title;
@@ -27,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<th><?= $usuario -> ID_USUARIO ?></th>
 	<th><?= $usuario -> NOMBRE_USUARIO ?></th>
 	<th><?= $usuario -> ROL ?></th>
-	<th><?php if($usuario -> ID_DEPARTAMENTO != ""){echo $usuario -> ID_DEPARTAMENTO;}else{echo "No tiene";} ?></th>
+	<th><?php if($usuario -> ID_DEPARTAMENTO != ""){echo (DepartamentoTabla::find($usuario -> ID_DEPARTAMENTO)->one() -> NOMBRE_DEPARTAMENTO);}else{echo "Sin informar";} ?></th>
 	<th><?= $usuario -> EMAIL ?></th>
 	<th> <a href = "<?= Url::toRoute(["usuario/update", "id_usuario" => $usuario -> ID_USUARIO])?>">Editar</a> | <?php if($usuario -> ROL != "administrador"){ ?>
 <a href="#" data-toggle="modal" data-target="#ID_USUARIO<?= $usuario->ID_USUARIO ?>">Eliminar</a>

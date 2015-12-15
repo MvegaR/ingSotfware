@@ -44,7 +44,7 @@
 		public function attributeLabels(){
 
 			return [
-				"NOMBRE_USUARIO" => "Nombre de usuario", "id_departamento" => "ID del departamento", 
+				"NOMBRE_USUARIO" => "Nombre de usuario", "id_departamento" => "Departamento", 
 				"rol" => "Rol del usuario", "password" => "Contraseña", "password_repeat" => "Repita contraseña", "reCaptcha" => "Verifique su humanidad"];
 
 		}

@@ -3,6 +3,8 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use himiklab\yii2\recaptcha\ReCaptcha;
+use yii\helpers\ArrayHelper;
+use app\models\DepartamentoTabla;
 $this->title = 'Editar departamento';
 $this -> params['breadcrumbs'][] = ["label" => "Lista de departamentos", "url" => ["usuario/viewdep"]];
 $this->params['breadcrumbs'][] = $this->title;

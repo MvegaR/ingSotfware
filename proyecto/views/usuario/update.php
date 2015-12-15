@@ -3,6 +3,8 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use himiklab\yii2\recaptcha\ReCaptcha;
+use yii\helpers\ArrayHelper;
+use app\models\DepartamentoTabla;
 $this->title = 'Editar usuario';
 $this -> params['breadcrumbs'][] = ["label" => "Lista de usuarios", "url" => ["usuario/view"]];
 $this->params['breadcrumbs'][] = $this->title;
@@ -24,7 +26,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?= $form -> field($model, "NOMBRE_USUARIO") -> input("text"); ?>
 
-<?= $form -> field($model, "id_departamento") -> input("text"); ?>
+<?= $form -> field($model, "id_departamento") -> dropDownList(
+			ArrayHelper::Map(DepartamentoTabla::find() -> all(),"ID_DEPARTAMENTO", "NOMBRE_DEPARTAMENTO" ), ["prompt" => "Seleccione departamento"] 
+		);?>
 
 <?= $form -> field($model, "rol") -> dropDownList(["docente" => "Docente","decano" => "Decano", "director" => "Director", "administrador" => "Admnistrador",]) ?>
 

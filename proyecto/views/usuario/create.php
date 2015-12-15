@@ -4,6 +4,8 @@ use yii\helpers\HTML;
 use yii\widgets\ActiveForm;
 use yii\helpers\Url;
 use himiklab\yii2\recaptcha\ReCaptcha;
+use yii\helpers\ArrayHelper;
+use app\models\DepartamentoTabla;
 
 $this->title = 'Crear usuario';
 $this -> params['breadcrumbs'][] = ["label" => "Lista de usuarios", "url" => ["usuario/view"]];
@@ -27,7 +29,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
 	<?= $form -> field($model, "NOMBRE_USUARIO") -> input("text"); ?>
 
-	<?= $form -> field($model, "id_departamento") -> input("text"); ?>
+	<?= $form -> field($model, "id_departamento") -> dropDownList(
+			ArrayHelper::Map(DepartamentoTabla::find() -> all(),"ID_DEPARTAMENTO", "NOMBRE_DEPARTAMENTO" ), ["prompt" => "Seleccione departamento"] 
+		);?>
 
 	<?= $form -> field($model, "rol") -> dropDownList(["docente" => "Docente","decano" => "Decano", "director" => "Director", "administrador" => "Admnistrador",]) ?>
 
