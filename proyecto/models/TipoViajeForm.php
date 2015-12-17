@@ -2,9 +2,10 @@
 
 namespace app\models;
 use Yii;
-use yii\base\Model;
+use yii\base\model;
+use app\models\TipoViaje;
 
-class TipoViajeForm extends Model{
+class TipoViajeForm extends model{
 
     public $id_tipo_viaje;
     public $nombre_tipo_viaje;
@@ -19,6 +20,13 @@ public function rules()
    ['monto_maximo', 'required'],
    ['id_tipo_viaje', 'integer'],
   ];
+ }
+
+ public static function nombrePorID($id){
+        $tipo = TipoViaje::find()
+                ->where(['ID_TIPO_DE_VIAJE' => $id])
+                ->one();
+        return $tipo;
  }
  
 }
