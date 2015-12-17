@@ -60,7 +60,7 @@ class SolicitudController extends Controller{
                 $viaje = Viaje::find()->where(['ID_VIAJE' => $ultimoidviaje])->one();
                 $viaje->delete();
                 $tablesolicitud = new Solicitud;
-                $msg = '<div class="alert alert-warning" role="alert"><strong>ERROR!</strong> No se envio la solicitud, ingrese datos validos.</div>';
+                $msg = '<div class="alert alert-warning" role="alert"><strong>ERROR!</strong> No se envi&#243; la solicitud, ingrese datos v&#225;lidos.</div>';
                 $modelsolicitud = $tablesolicitud->find()->where(['ID_USUARIO' => 1])->all();
     	        return $this->render('index', ['model' => $modelsolicitud, 'msg' => $msg]);
             }
@@ -78,7 +78,7 @@ class SolicitudController extends Controller{
                     $viaje = Viaje::find()->where(['ID_VIAJE' => $ultimoidviaje])->one();
                     $viaje->delete();
                     $tablesolicitud = new Solicitud;
-                    $msg = '<div class="alert alert-danger" role="alert"><strong>ERROR!</strong> No se envio la solicitud, ingrese datos validos.</div>';
+                    $msg = '<div class="alert alert-danger" role="alert"><strong>ERROR!</strong> No se envi&#243; la solicitud, ingrese datos v&#225;lidos.</div>';
                     $modelsolicitud = $tablesolicitud->find()->where(['ID_USUARIO' => 1])->all();
     	            return $this->render('index', ['model' => $modelsolicitud, 'msg' => $msg]);
                 }
@@ -97,7 +97,7 @@ class SolicitudController extends Controller{
                     $viaje = Viaje::find()->where(['ID_VIAJE' => $ultimoidviaje])->one();
                     $viaje->delete();
                     $tablesolicitud = new Solicitud;
-                    $msg = '<div class="alert alert-danger" role="alert"><strong>ERROR!</strong> No se envio la solicitud, ingrese datos validos.</div>';
+                    $msg = '<div class="alert alert-danger" role="alert"><strong>ERROR!</strong> No se envi&#243; la solicitud, ingrese datos v&#225;lidos.</div>';
                     $modelsolicitud = $tablesolicitud->find()->where(['ID_USUARIO' => 1])->all();
     	            return $this->render('index', ['model' => $modelsolicitud, 'msg' => $msg]);
                 }
@@ -116,7 +116,7 @@ class SolicitudController extends Controller{
                     $viaje = Viaje::find()->where(['ID_VIAJE' => $ultimoidviaje])->one();
                     $viaje->delete();
                     $tablesolicitud = new Solicitud;
-                    $msg = '<div class="alert alert-danger" role="alert"><strong>ERROR!</strong> No se envio la solicitud, ingrese datos validos.</div>';
+                    $msg = '<div class="alert alert-danger" role="alert"><strong>ERROR!</strong> No se envi&#243; la solicitud, ingrese datos v&#225;lidos.</div>';
                     $modelsolicitud = $tablesolicitud->find()->where(['ID_USUARIO' => 1])->all();
     	            return $this->render('index', ['model' => $modelsolicitud, 'msg' => $msg]);
                 }
@@ -135,7 +135,7 @@ class SolicitudController extends Controller{
                     $viaje = Viaje::find()->where(['ID_VIAJE' => $ultimoidviaje])->one();
                     $viaje->delete();
                     $tablesolicitud = new Solicitud;
-                    $msg = '<div class="alert alert-danger" role="alert"><strong>ERROR!</strong> No se envio la solicitud, ingrese datos validos.</div>';
+                    $msg = '<div class="alert alert-danger" role="alert"><strong>ERROR!</strong> No se envi&#243; la solicitud, ingrese datos v&#225;lidos.</div>';
                     $modelsolicitud = $tablesolicitud->find()->where(['ID_USUARIO' => 1])->all();
     	            return $this->render('index', ['model' => $modelsolicitud, 'msg' => $msg]);
                 }

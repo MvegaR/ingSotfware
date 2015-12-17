@@ -3,6 +3,7 @@ use yii\helpers\Url;
 use app\models\TipoViajeForm;
 
 $this->title = 'Detalle Solicitud';
+$this->params['breadcrumbs'][] = ["label" => "Lista de Solicitudes", "url" => ["/solicitud"]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h3>Detalle de Solicitud:</h3>
@@ -13,10 +14,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <td><strong>ID</strong></td>
         <td><strong>Estado</strong></td>
         <!-- <td><strong>ID Tipo Viaje</strong></td> -->
-        <td><strong>Nombre Tipo Viaje</strong></td>
-        <td><strong>Monto Maximo</strong></td>
-        <td><strong>Fecha de la solicitud</strong></td>
-        <td><strong>Descripcion</strong></td>
+        <td><strong>Tipo de Viaje</strong></td>
+        <td><strong>Monto M&#225;ximo</strong></td>
+        <td><strong>Fecha de env&#237;o</strong></td>
+        <td><strong>Descripci&#243;n</strong></td>
     </tr>
     <tr>
         <td><?= $modelsolicitud->ID_SOLICITUD ?></td>
@@ -48,10 +49,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="col-sm-10">
     <table class="table">
          <tr>
-             <td><strong>Pais</strong></td>
+             <td><strong>Pa&#237;s</strong></td>
              <td><strong>Ciudad</strong></td>
-             <td><strong>Medio Transporte</strong></td>
-             <td><strong>Duracion en Dias</strong></td>
+             <td><strong>Medio de Transporte</strong></td>
+             <td><strong>Duracion en D&#237;as</strong></td>
          </tr>
          <?php foreach ($modeldestino as $row): ?>
                 <tr>

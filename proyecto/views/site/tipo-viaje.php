@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <tr>
         <th>#</th>
         <th>Nombre</th>
-        <th>Monto Maximo</th>
+        <th>Monto M&#225;ximo</th>
         <th></th>
         <th></th>
     </tr>
@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <h4 class="modal-title">Eliminar Tipo de Viaje</h4>
                               </div>
                               <div class="modal-body">
-                                    <div class="alert alert-danger" role="alert">¿Realmente desea eliminar el Tipo de Viaje "<?= $row->NOMBRE_TIPO_DE_VIAJE ?>"?</div>
+                                    <div class="alert alert-danger" role="alert">¿Realmente quiere eliminar el Tipo de Viaje "<?= $row->NOMBRE_TIPO_DE_VIAJE ?>"?</div>
                               </div>
                               <div class="modal-footer">
                               <?= Html::beginForm(Url::toRoute("site/borrar-t-viaje"), "POST") ?>

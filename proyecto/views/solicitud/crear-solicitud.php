@@ -6,11 +6,12 @@ use yii\helpers\ArrayHelper;
 use app\models\TipoViaje;
 
 $this->title = 'Crear Solicitud';
+$this->params['breadcrumbs'][] = ["label" => "Lista de Solicitudes", "url" => ["/solicitud"]];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <div class="content">
-<h2><strong>Formulario para la creacion de solicitud de viaje</strong></h2>
+<h2><strong>Formulario para la creaci&#243;n de solicitud de viaje</strong></h2>
 <?php $form = ActiveForm::begin([
     "method" => "post",
  'enableClientValidation' => true,
@@ -23,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <tr>
                     <td><strong>ID</strong></td>
                     <td><strong>Tipo</strong></td>
-                    <td><strong>Monto Maximo</strong></td>
+                    <td><strong>Monto M&#225;ximo</strong></td>
                 </tr>
                 <?php foreach ($tipos as $row): ?>
                 <tr>
@@ -35,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </table>
         </div>
     </div>
-    <h3>Datos del Viaje</h3>
+    <h3><strong>Datos del Viaje</strong></h3>
     <label class="col-sm-2 control-label">Tipo de Viaje: </label>
     <div class="form-group">
        <div class="col-sm-10">
@@ -50,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
        <div class="col-sm-10">
         <table class="table">
             <tr>
-                <td><?= $form->field($model, "diai")->textInput(array('placeholder' => ''))->label('Dia') ?></td>
+                <td><?= $form->field($model, "diai")->textInput(array('placeholder' => ''))->label('D&#237;a') ?></td>
                 <td><?= $form->field($model, "mesi")->textInput(array('placeholder' => ''))->label('Mes') ?></td>
                 <td><?= $form->field($model, "anhoi")->textInput(array('placeholder' => ''))->label('A&#241;o') ?></td>
             </tr>
@@ -62,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
        <div class="col-sm-10">
         <table class="table">
             <tr>
-                <td><?= $form->field($model, "diat")->textInput(array('placeholder' => ''))->label('Dia') ?></td>
+                <td><?= $form->field($model, "diat")->textInput(array('placeholder' => ''))->label('D&#237;a') ?></td>
                 <td><?= $form->field($model, "mest")->textInput(array('placeholder' => ''))->label('Mes') ?></td>
                 <td><?= $form->field($model, "anhot")->textInput(array('placeholder' => ''))->label('A&#241;o') ?></td>
             </tr>
@@ -82,12 +83,12 @@ $this->params['breadcrumbs'][] = $this->title;
        </div> 
     </div>
 
-    <h3>Datos del Destino</h3>
+    <h3><strong>Datos del Destino</strong></h3>
         <div class="form-group">
             <label class="col-sm-2 control-label"><strong>Destino(s):</strong></label>
             <div class="col-sm-10">
                 <table class="table">
-                    <tr><td><strong>Incluir</strong></td><td><strong>Pais</strong></td><td><strong>Ciudad</strong></td><td><strong>Medio de Transporte</strong></td><td><strong>Duracion en Dias</td></tr>
+                    <tr><td><strong>Incluir</strong></td><td><strong>Pa&#237;s</strong></td><td><strong>Ciudad</strong></td><td><strong>Medio de Transporte</strong></td><td><strong>Duraci&#243;n en D&#237;as</td></tr>
                     <?php $model->check1 = 1; ?>
                     <tr><td><?= $form->field($model, 'check1')->checkbox(array('label'=>'','disabled'=>false)) ?></td><td><?= $form->field($model, "pais1")->textInput(array('placeholder' => 'Chile...'))->label(false) ?></td><td><?= $form->field($model, "ciudad1")->textInput(array('placeholder' => 'Concepcion...'))->label(false) ?></td><td><?= $form->field($model, "transporte1")->textInput(array('placeholder' => 'AutoBus...'))->label(false) ?></td><td><?= $form->field($model, "duracion1")->textInput(array('placeholder' => 'Solo numeros: 3'))->label(false) ?></td></tr>
                     <tr><td><?= $form->field($model, 'check2')->checkbox(array('label'=>'','disabled'=>false)) ?></td><td><?= $form->field($model, "pais2")->input("text")->label(false) ?></td><td><?= $form->field($model, "ciudad2")->input("text")->label(false) ?></td><td><?= $form->field($model, "transporte2")->input("text")->label(false) ?></td><td><?= $form->field($model, "duracion2")->input("number")->label(false) ?></td></tr>

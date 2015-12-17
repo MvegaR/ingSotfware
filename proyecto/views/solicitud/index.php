@@ -13,10 +13,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <td><strong>ID</strong></td>
         <td><strong>Estado</strong></td>
         <!-- <td><strong>ID Tipo Viaje</strong></td> -->
-        <td><strong>Nombre Tipo Viaje</strong></td>
-        <td><strong>Monto Maximo</strong></td>
-        <td><strong>Fecha de la solicitud</strong></td>
-        <td><strong>Descripcion</strong></td>
+        <td><strong>Tipo de Viaje</strong></td>
+        <!--<td><strong>Monto Maximo</strong></td> -->
+        <td><strong>Fecha de env&#237;o</strong></td>
+        <td><strong>Descripci&#243;n</strong></td>
     </tr>
     <?php foreach($model as $row): ?>
     <tr>
@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <td><?= $row->ESTADO_SOLICITUD ?></td>
         <!--<td><?= $row->ID_TIPO_DE_VIAJE ?></td>-->
         <td><?= TipoViajeForm::nombrePorID($row->ID_TIPO_DE_VIAJE)->NOMBRE_TIPO_DE_VIAJE; ?></td>
-        <td>$<?= TipoViajeForm::nombrePorID($row->ID_TIPO_DE_VIAJE)->MONTO_MAXIMO; ?></td>
+        <!--<td>$<?= TipoViajeForm::nombrePorID($row->ID_TIPO_DE_VIAJE)->MONTO_MAXIMO; ?></td> -->
         <td><?= $row->FECHA_SOLICITUD ?></td>
         <td width="400"><?= $row->CUERPO_SOLICITUD ?></td>
     </tr>
