@@ -49,51 +49,97 @@ class SolicitudController extends Controller{
             $tableviaje->insert();
             $ultimoidviaje = solicitudMet::ultimoID();
             if($model->check1 == 1){
-            $tabledestino = new Destino;
-            $tabledestino->ID_VIAJE = $ultimoidviaje;
-            $tabledestino->DURACION_VIAJE_DIAS = $model->duracion1;
-            $tabledestino->MEDIO_DE_TRANSPORTE = $model->transporte1;
-            $tabledestino->CIUDAD_DESTINO = $model->ciudad1;
-            $tabledestino->PAIS_DESTINO = $model->pais1;
-            $tabledestino->insert();
+                $tabledestino = new Destino;
+                $tabledestino->ID_VIAJE = $ultimoidviaje;
+                $tabledestino->DURACION_VIAJE_DIAS = $model->duracion1;
+                $tabledestino->MEDIO_DE_TRANSPORTE = $model->transporte1;
+                $tabledestino->CIUDAD_DESTINO = $model->ciudad1;
+                $tabledestino->PAIS_DESTINO = $model->pais1;
+                $tabledestino->insert();
+            }else{
+                $viaje = Viaje::find()->where(['ID_VIAJE' => $ultimoidviaje])->one();
+                $viaje->delete();
+                $tablesolicitud = new Solicitud;
+                $msg = '<div class="alert alert-warning" role="alert"><strong>ERROR!</strong> No se envio la solicitud, ingrese datos validos.</div>';
+                $modelsolicitud = $tablesolicitud->find()->where(['ID_USUARIO' => 1])->all();
+    	        return $this->render('index', ['model' => $modelsolicitud, 'msg' => $msg]);
             }
-            if($model->check2 == 1 && $model->duracion2 != null && $model->transporte2 != null && $model->ciudad2 != null && $model->pais2 != null){
-            $tabledestino2 = new Destino;
-            $tabledestino2->ID_VIAJE = $ultimoidviaje;
-            $tabledestino2->DURACION_VIAJE_DIAS = $model->duracion2;
-            $tabledestino2->MEDIO_DE_TRANSPORTE = $model->transporte2;
-            $tabledestino2->CIUDAD_DESTINO = $model->ciudad2;
-            $tabledestino2->PAIS_DESTINO = $model->pais2;
-            $tabledestino2->insert();
+            if($model->check2 == 1){
+                if($model->duracion2 != null && $model->transporte2 != null && $model->ciudad2 != null && $model->pais2 != null){
+                    $tabledestino2 = new Destino;
+                    $tabledestino2->ID_VIAJE = $ultimoidviaje;
+                    $tabledestino2->DURACION_VIAJE_DIAS = $model->duracion2;
+                    $tabledestino2->MEDIO_DE_TRANSPORTE = $model->transporte2;
+                    $tabledestino2->CIUDAD_DESTINO = $model->ciudad2;
+                    $tabledestino2->PAIS_DESTINO = $model->pais2;
+                    $tabledestino2->insert();
+                }else{
+                    Destino::deleteAll("ID_VIAJE=".$ultimoidviaje);
+                    $viaje = Viaje::find()->where(['ID_VIAJE' => $ultimoidviaje])->one();
+                    $viaje->delete();
+                    $tablesolicitud = new Solicitud;
+                    $msg = '<div class="alert alert-danger" role="alert"><strong>ERROR!</strong> No se envio la solicitud, ingrese datos validos.</div>';
+                    $modelsolicitud = $tablesolicitud->find()->where(['ID_USUARIO' => 1])->all();
+    	            return $this->render('index', ['model' => $modelsolicitud, 'msg' => $msg]);
+                }
             }
-            if($model->check3 == 1 && $model->duracion3 != null && $model->transporte3 != null && $model->ciudad3 != null && $model->pais3 != null){
-            $tabledestino3 = new Destino;
-            $tabledestino3->ID_VIAJE = $ultimoidviaje;
-            $tabledestino3->DURACION_VIAJE_DIAS = $model->duracion3;
-            $tabledestino3->MEDIO_DE_TRANSPORTE = $model->transporte3;
-            $tabledestino3->CIUDAD_DESTINO = $model->ciudad3;
-            $tabledestino3->PAIS_DESTINO = $model->pais3;
-            $tabledestino3->insert();
+            if($model->check3 == 1){
+                if($model->duracion3 != null && $model->transporte3 != null && $model->ciudad3 != null && $model->pais3 != null){
+                    $tabledestino3 = new Destino;
+                    $tabledestino3->ID_VIAJE = $ultimoidviaje;
+                    $tabledestino3->DURACION_VIAJE_DIAS = $model->duracion3;
+                    $tabledestino3->MEDIO_DE_TRANSPORTE = $model->transporte3;
+                    $tabledestino3->CIUDAD_DESTINO = $model->ciudad3;
+                    $tabledestino3->PAIS_DESTINO = $model->pais3;
+                    $tabledestino3->insert();
+                }else{
+                    Destino::deleteAll("ID_VIAJE=".$ultimoidviaje);
+                    $viaje = Viaje::find()->where(['ID_VIAJE' => $ultimoidviaje])->one();
+                    $viaje->delete();
+                    $tablesolicitud = new Solicitud;
+                    $msg = '<div class="alert alert-danger" role="alert"><strong>ERROR!</strong> No se envio la solicitud, ingrese datos validos.</div>';
+                    $modelsolicitud = $tablesolicitud->find()->where(['ID_USUARIO' => 1])->all();
+    	            return $this->render('index', ['model' => $modelsolicitud, 'msg' => $msg]);
+                }
             }
-            if($model->check4 == 1 && $model->duracion4 != null && $model->transporte4 != null && $model->ciudad4 != null && $model->pais4 != null){
-            $tabledestino4 = new Destino;
-            $tabledestino4->ID_VIAJE = $ultimoidviaje;
-            $tabledestino4->DURACION_VIAJE_DIAS = $model->duracion4;
-            $tabledestino4->MEDIO_DE_TRANSPORTE = $model->transporte4;
-            $tabledestino4->CIUDAD_DESTINO = $model->ciudad4;
-            $tabledestino4->PAIS_DESTINO = $model->pais4;
-            $tabledestino4->insert();
+            if($model->check4 == 1){
+                if($model->duracion4 != null && $model->transporte4 != null && $model->ciudad4 != null && $model->pais4 != null){
+                    $tabledestino4 = new Destino;
+                    $tabledestino4->ID_VIAJE = $ultimoidviaje;
+                    $tabledestino4->DURACION_VIAJE_DIAS = $model->duracion4;
+                    $tabledestino4->MEDIO_DE_TRANSPORTE = $model->transporte4;
+                    $tabledestino4->CIUDAD_DESTINO = $model->ciudad4;
+                    $tabledestino4->PAIS_DESTINO = $model->pais4;
+                    $tabledestino4->insert();
+                }else{
+                    Destino::deleteAll("ID_VIAJE=".$ultimoidviaje);
+                    $viaje = Viaje::find()->where(['ID_VIAJE' => $ultimoidviaje])->one();
+                    $viaje->delete();
+                    $tablesolicitud = new Solicitud;
+                    $msg = '<div class="alert alert-danger" role="alert"><strong>ERROR!</strong> No se envio la solicitud, ingrese datos validos.</div>';
+                    $modelsolicitud = $tablesolicitud->find()->where(['ID_USUARIO' => 1])->all();
+    	            return $this->render('index', ['model' => $modelsolicitud, 'msg' => $msg]);
+                }
             }
-            if($model->check5 == 1 && $model->duracion5 != null && $model->transporte5 != null && $model->ciudad5 != null && $model->pais5 != null){
-            $tabledestino5 = new Destino;
-            $tabledestino5->ID_VIAJE = $ultimoidviaje;
-            $tabledestino5->DURACION_VIAJE_DIAS = $model->duracion5;
-            $tabledestino5->MEDIO_DE_TRANSPORTE = $model->transporte5;
-            $tabledestino5->CIUDAD_DESTINO = $model->ciudad5;
-            $tabledestino5->PAIS_DESTINO = $model->pais5;
-            $tabledestino5->insert();
+            if($model->check5 == 1){
+                if($model->duracion5 != null && $model->transporte5 != null && $model->ciudad5 != null && $model->pais5 != null){
+                    $tabledestino5 = new Destino;
+                    $tabledestino5->ID_VIAJE = $ultimoidviaje;
+                    $tabledestino5->DURACION_VIAJE_DIAS = $model->duracion5;
+                    $tabledestino5->MEDIO_DE_TRANSPORTE = $model->transporte5;
+                    $tabledestino5->CIUDAD_DESTINO = $model->ciudad5;
+                    $tabledestino5->PAIS_DESTINO = $model->pais5;
+                    $tabledestino5->insert();
+                }else{
+                    Destino::deleteAll("ID_VIAJE=".$ultimoidviaje);
+                    $viaje = Viaje::find()->where(['ID_VIAJE' => $ultimoidviaje])->one();
+                    $viaje->delete();
+                    $tablesolicitud = new Solicitud;
+                    $msg = '<div class="alert alert-danger" role="alert"><strong>ERROR!</strong> No se envio la solicitud, ingrese datos validos.</div>';
+                    $modelsolicitud = $tablesolicitud->find()->where(['ID_USUARIO' => 1])->all();
+    	            return $this->render('index', ['model' => $modelsolicitud, 'msg' => $msg]);
+                }
             }
-
             $tablesolicitud = new Solicitud;
             $tablesolicitud->ID_USUARIO = 1;
             $tablesolicitud->ID_TIPO_DE_VIAJE = $model->idtipoviaje;
