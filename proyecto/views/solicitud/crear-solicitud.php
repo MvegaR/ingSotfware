@@ -48,13 +48,25 @@ $this->params['breadcrumbs'][] = $this->title;
     <label class="col-sm-2 control-label">Fecha de Inicio: </label>
     <div class="form-group">
        <div class="col-sm-10">
-        <?= $form->field($model, "fechai")->textInput(array('placeholder' => 'Formato: 2015-12-02'))->label(false) ?>
+        <table class="table">
+            <tr>
+                <td><?= $form->field($model, "diai")->textInput(array('placeholder' => ''))->label('Dia') ?></td>
+                <td><?= $form->field($model, "mesi")->textInput(array('placeholder' => ''))->label('Mes') ?></td>
+                <td><?= $form->field($model, "anhoi")->textInput(array('placeholder' => ''))->label('A&#241;o') ?></td>
+            </tr>
+        </table>
        </div>
     </div>
     <label class="col-sm-2 control-label">Fecha de Termino: </label>
     <div class="form-group">
        <div class="col-sm-10">
-        <?= $form->field($model, "fechat")->textInput(array('placeholder' => 'Formato: 2015-12-02'))->label(false) ?>
+        <table class="table">
+            <tr>
+                <td><?= $form->field($model, "diat")->textInput(array('placeholder' => ''))->label('Dia') ?></td>
+                <td><?= $form->field($model, "mest")->textInput(array('placeholder' => ''))->label('Mes') ?></td>
+                <td><?= $form->field($model, "anhot")->textInput(array('placeholder' => ''))->label('A&#241;o') ?></td>
+            </tr>
+        </table>
        </div>
     </div>
     <label class="col-sm-2 control-label">Origen: </label>

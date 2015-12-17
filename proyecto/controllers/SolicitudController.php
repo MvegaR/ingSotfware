@@ -44,8 +44,8 @@ class SolicitudController extends Controller{
         if($model->load(Yii::$app->request->post())){
             $tableviaje = new Viaje;
             $tableviaje->ORIGEN_VIAJE = $model->origen;
-            $tableviaje->FECHA_INICIO_DIRECCION = $model->fechai;
-            $tableviaje->FECHA_TERMINO_DIRECCION = $model->fechat;
+            $tableviaje->FECHA_INICIO_DIRECCION = $model->anhoi.'-'.$model->mesi.'-'.$model->diai.' '.'00:'.'00:'.'01';
+            $tableviaje->FECHA_TERMINO_DIRECCION = $model->anhot.'-'.$model->mest.'-'.$model->diat.' '.'23:'.'59:'.'59';
             $tableviaje->insert();
             $ultimoidviaje = solicitudMet::ultimoID();
             if($model->check1 == 1){
