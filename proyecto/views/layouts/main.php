@@ -37,17 +37,19 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Inicio', 'url' => ['/site/index']],
+            ['label' => 'Gestion de gastos', 'url' => ['/site/view']],
             ['label' => 'Gestión usuarios', 'url' => ['/usuario/view']],
             ['label' => 'Gestión Tipos Viaje', 'url' => ['/site/ver-t-viaje']],
+            ['label' => 'Solicitudes (deunAcademico)', 'url' => ['/solicitud']],
            # ['label' => 'About', 'url' => ['/site/about']],
             # ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ?
+            /* Yii::$app->user->isGuest ?
                 ['label' => 'Iniciar sesión', 'url' => ['/site/login']] :
                 [
                     'label' => 'Salir (' . Yii::$app->user->identity->username . ')',
                     'url' => ['/site/logout'],
                     'linkOptions' => ['data-method' => 'post']
-                ],
+                ],*/
         ],
     ]);
     NavBar::end();
@@ -63,7 +65,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; Ing. Software <?= date('Y') ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>

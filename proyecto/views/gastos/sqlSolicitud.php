@@ -1,19 +1,16 @@
 <?php  
+
 require_once "conexion.php"; 
 
-class sqlSolicitud extends conexion{
-
-    public $id_usuario;
-   
-    public function __construct($id_usuario) 
-    {
-        $this->id_usuario = $id_usuario;
+class sqlSolicitud extends conexion{     
+    public function __construct() 
+    { 
         parent::__construct(); 
     } 
 
     public function get_tipos() 
     {
-        $result = $this->_db->query('SELECT * FROM TIPO_DE_VIAJE');
+        $result = $this->_db->query('SELECT * FROM GASTOS');
         $rows = array();
         while ($row = mysqli_fetch_assoc($result)) {
             $rows[] = $row;
@@ -22,23 +19,31 @@ class sqlSolicitud extends conexion{
     }
 
     public function get_solicitud(){
-        $result = $this->_db->query("SELECT DISTINCT T.NOMBRE_TIPO_DE_VIAJE, T.MONTO_MAXIMO, S.FECHA_SOLICITUD, S.ESTADO_SOLICITUD, S.CUERPO_SOLICITUD FROM SOLICITUD_DE_VIAJE S, VIAJE V, DESTINO D, TIPO_DE_VIAJE T WHERE ID_USUARIO='".$this->id_usuario."' AND S.ID_VIAJE = V.ID_VIAJE AND V.ID_VIAJE = D.ID_VIAJE AND T.ID_TIPO_DE_VIAJE = S.ID_TIPO_DE_VIAJE");
+        $result = $this->_db->query("SELECT * FROM GASTOS G, VIAJE V WHERE G.ID_VIAJE = V.ID_VIAJE ");
         $rows = array();
         while ($row = mysqli_fetch_assoc($result)) {
             $rows[] = $row;
         }
-        return $rows; 
+        return $rows;
     }
 
-    public function set_solicitud($ID2,$ID3,$ID5,$FECH,$ESTADO,$CUERPO) 
+    public function set_gasto($ID3,$NOMBRE,$MONTO,$FECHA) 
     { 
         $this->_db->query(
-            "INSERT INTO SOLICITUD_DE_VIAJE(ID_USUARIO,ID_TIPO_DE_VIAJE,ID_VIAJE,FECHA_SOLICITUD,ESTADO_SOLICITUD,CUERPO_SOLICITUD) 
-             VALUES('$ID2','$ID3','$ID5','$FECH','$ESTADO','$CUERPO')"
+            "INSERT INTO GASTOS(ID_VIAJE,NOMBRE_GASTO,MONTO_GASTO,FECHA_GASTO) 
+             VALUES('$ID3','$NOMBRE','$MONTO','$FECHA')"
              ); 
     } 
 
-    public function set_viaje($ORIG,$FECHI,$FECHT) 
+
+    public function up_gasto($ID,$ID3,$NOMBRE,$MONTO,$FECHA){
+         $this->_db->query(
+            "UPDATE gastos SET ID_VIAJE='$ID3', NOMBRE_GASTO='$NOMBRE', MONTO_GASTO='$MONTO',FECHA_GASTO='$FECHA' WHERE ID_GASTO='$ID'"
+             ); 
+    }
+
+
+    /*public function set_viaje($ORIG,$FECHI,$FECHT) 
     { 
         $this->_db->query(
             "INSERT INTO VIAJE(ORIGEN_VIAJE,FECHA_INICIO_DIRECCION,FECHA_TERMINO_DIRECCION) 
@@ -71,6 +76,6 @@ class sqlSolicitud extends conexion{
             $rows[] = $row;
         }
         return $rows;
-    }
+    }*/
 
 } ?>
