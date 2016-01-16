@@ -1,20 +1,28 @@
 <?php
 
 /* @var $this yii\web\View */
+use yii\helpers\Url;
 
 $this->title = 'Declaración y solicitud de viajes';
 ?>
 <div class="site-index">
 
     <div class="jumbotron">
-        <h1>Congratulations!</h1>
+        <h1>Grupo 3 ICINF</h1>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
+        <p class="lead">Sistema administrativo web de rendición de gastos de viaje para los departamentos de la Universidad del Bío-Bío</p>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+        
     </div>
-
-    <div class="body-content">
+    <div class="list-group-item center">
+<a href="<?= Url::toRoute("site/view") ?>" class="list-group-item">Ver lista gastos. (Ramón)</a><br>
+<a href="<?= Url::toRoute("usuario/view") ?>" class="list-group-item">Ver lista de usuarios. (Marcos)</a><br>
+<a href="<?= Url::toRoute("usuario/viewdep") ?>" class="list-group-item">Ver lista de departamentos. (Marcos)</a><br>
+<a href="<?= Url::toRoute("site/ver-t-viaje") ?>" class="list-group-item">Lista de tipo de viaje. (Raúl)</a><br>
+<a href="<?= Url::toRoute("solicitud/index") ?>" class="list-group-item">Ver lista solicitudes como docente. (Raúl)</a><br>
+<a href="<?= Url::toRoute("solicitudes/view") ?>" class="list-group-item" > Ver solicitudes como evaluador. (Pablo)</a><br>
+</div>
+   <?php echo""; /* <div class="body-content">
 
         <div class="row">
             <div class="col-lg-4">
@@ -49,5 +57,5 @@ $this->title = 'Declaración y solicitud de viajes';
             </div>
         </div>
 
-    </div>
+    </div> */?>
 </div>

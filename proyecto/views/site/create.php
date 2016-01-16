@@ -23,7 +23,7 @@ use yii\helpers\Url;
 </div>
 
 <div class="form-group">
- <?= $form->field($model, "fechagasto")->textInput(array('placeholder' => '0000-00-00 00:00:00'))->label("Fecha del Gasto"); ?> 
+ <?= $form->field($model, "fechagasto")->input("datetime-local")->label("Fecha del Gasto"); ?> 
 </div>
 
 <div class="form-group">

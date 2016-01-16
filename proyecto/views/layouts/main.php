@@ -27,7 +27,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Declaración y solicitud de viajes',
+        'brandLabel' => 'ICINF3',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -40,7 +40,8 @@ AppAsset::register($this);
             ['label' => 'Gestion de gastos', 'url' => ['/site/view']],
             ['label' => 'Gestión usuarios', 'url' => ['/usuario/view']],
             ['label' => 'Gestión Tipos Viaje', 'url' => ['/site/ver-t-viaje']],
-            ['label' => 'Solicitudes (deunAcademico)', 'url' => ['/solicitud']],
+            ['label' => 'Solicitudes (Docente)', 'url' => ['/solicitud/index']],
+            ['label' => 'Solicitudes (Evaluador)', 'url' => ['/solicitudes/view']],
            # ['label' => 'About', 'url' => ['/site/about']],
             # ['label' => 'Contact', 'url' => ['/site/contact']],
             /* Yii::$app->user->isGuest ?
@@ -65,9 +66,9 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; Ing. Software <?= date('Y') ?></p>
+        <p class="pull-left">&copy; Proyecto Ing. Software Grupo 3 ICINF<?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <!-- <p class="pull-right"><?= Yii::powered() ?></p> -->
     </div>
 </footer>
 

@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <h3> Lista de usuarios </h3>
 <div class="panel panel-default">
-<table class="table table-striped table-hover">
+<table class="table table-bordered table-striped table-hover">
 	<thead>
 <tr>
 	<th>ID</th>

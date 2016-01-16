@@ -67,6 +67,7 @@ class SolicitudMet extends Model
                     ['diat', 'compare', 'compareValue' => 1, 'operator' => '>=', 'message' => 'Ingrese un valor entre 01 y 31'],
                     ['diat', 'compare', 'compareValue' => 31, 'operator' => '<=', 'message' => 'Ingrese un valor entre 01 y 31'],
                     ['origen', 'required', 'message' => 'Campo requerido'],
+   ['origen', 'match', 'pattern' => '/^[a-z0-9_-]{3,15}$/', 'message' => 'Solo se aceptan caracteres alfanumericos sin espacios'],
                     ['cuerpo', 'required', 'message' => 'Campo requerido'],
                     ['check1', 'required', 'message' => 'Campo requerido'],
                     ['check1', 'integer'],

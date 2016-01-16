@@ -14,8 +14,9 @@ class TipoViajeForm extends Model{
 public function rules()
  {
   return [
-   ['nombre_tipo_viaje', 'required', 'message' => 'Campo requerido'],
+   [['nombre_tipo_viaje'], 'required', 'message' => 'Campo requerido'],
    ['nombre_tipo_viaje', 'string'],
+   ['nombre_tipo_viaje', 'match', 'pattern' => '/^[a-zA-Z0-9_-]+$/', 'message' => 'Solo se aceptan caracteres alfanumericos'],
    ['monto_maximo', 'integer', 'message' => 'El monto debe ser un numero'],
    ['monto_maximo', 'required'],
    ['monto_maximo', 'compare', 'compareValue' => 1, 'operator' => '>=', 'message' => 'Ingrese un valor mayor que 0'],
