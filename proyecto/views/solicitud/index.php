@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <td><?= $row->FECHA_SOLICITUD ?></td>
         <td width="400"><?= $row->CUERPO_SOLICITUD ?></td>
         <td><a href="<?= Url::toRoute(["solicitud/detalle", "ID_SOLICITUD" => $row->ID_SOLICITUD]) ?>">Ver Detalle</a></td>
-        <?php if(Estadosolicitud::find($row -> ID_ESTADO)->one() -> ESTADO == "Aprobado") 
+        <?php if($row->ID_ESTADO == "2") 
                   echo '<td><a href="'.Url::toRoute(["site/pdf", "ID_SOLICITUD" => $row->ID_SOLICITUD]).'">Generar PDF</a></td>';
               else
                   echo '<td><strong></strong></td>';

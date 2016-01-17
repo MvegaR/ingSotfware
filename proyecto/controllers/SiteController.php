@@ -25,6 +25,92 @@ use mPDF;
 
 class SiteController extends Controller
 {
+
+	
+	public function actionUpdategas()
+    {
+        $model = new FormGastos;
+        $msg = null;
+        
+        if($model->load(Yii::$app->request->post())) //esto falla, pero da true.
+        {
+        	$table = GASTOS::findOne($model->ID_GASTO);
+
+			$model -> ID_GASTO = $table -> ID_GASTO;
+			$model -> id_viaje = $table -> ID_VIAJE; //por que falla hay que hacer esto, no sé por qué:
+			$model -> estadogasto = (int)Yii::$app->request->post()["FormGastos"]["estadogasto"];
+			$model -> nombregasto = $table -> NOMBRE_GASTO;
+			$model -> montogasto = $table -> MONTO_GASTO;
+			$model -> fechagasto = $table -> FECHA_GASTO;
+
+            if($model->validate())
+            {
+                
+                if($table)
+                {
+                	
+                    $table->ID_GASTO = $model->ID_GASTO;
+                    $table->ID_ESTADO_GASTO = $model->estadogasto;
+
+                    if ($table->update())
+                    {
+                        $msg = "El estado de gasto ha sido actualizado correctamente";
+                    }
+                    else
+                    {
+                        $msg = "El estado de gasto no ha podido ser actualizado";
+                    }
+                }
+                else
+                {
+                    $msg = "El Gasto seleccionado no ha sido encontrado";
+                }
+                $table = new Gastos;
+				$model = $table->find()->all();
+				return $this->render("formu", ["model" => $model, 'msg' => $msg]);
+            }
+            else
+            {
+                $model->getErrors();
+            }
+        }
+        
+        
+        if (Yii::$app->request->get("ID_GASTO"))
+        {
+            $ID_GASTO = Html::encode($_GET["ID_GASTO"]);
+            if ((int) $ID_GASTO)
+            {
+                $table = GASTOS::findOne($ID_GASTO);
+                if($table)
+                {
+                   	$model->ID_GASTO = $table->ID_GASTO;
+                    $model->estadogasto = $table->ID_ESTADO_GASTO;
+                   
+                   
+                }
+                else
+                {
+                    return $this->redirect(["site/formu"]);
+                }
+            }
+            else
+            {
+                return $this->redirect(["site/formu"]);
+            }
+        }
+        else
+        {
+            return $this->redirect(["site/formu"]);
+        }
+        return $this->render("updategas", ["model" => $model, "msg" => $msg]);
+    }
+
+	public function actionFormu(){
+	$table = new GASTOS;
+	$model = $table->find()->all();
+	return $this->render("formu",["model"=> $model]);
+	}
 	
 	public function actionSaludar(){
 		$saludar = "Hola mundo";
