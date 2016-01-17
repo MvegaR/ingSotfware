@@ -1,13 +1,4 @@
-/**
- * Database schema required by \yii\rbac\DbManager.
- *
- * @author Qiang Xue <qiang.xue@gmail.com>
- * @author Alexander Kochetov <creocoder@gmail.com>
- * @link http://www.yiiframework.com/
- * @copyright 2008 Yii Software LLC
- * @license http://www.yiiframework.com/license/
- * @since 2.0
- */
+
 
 drop table if exists `auth_assignment`;
 drop table if exists `auth_item_child`;

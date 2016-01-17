@@ -44,13 +44,13 @@ AppAsset::register($this);
             ['label' => 'Solicitudes (Evaluador)', 'url' => ['/solicitudes/view']],
            # ['label' => 'About', 'url' => ['/site/about']],
             # ['label' => 'Contact', 'url' => ['/site/contact']],
-            /* Yii::$app->user->isGuest ?
+             Yii::$app->user->isGuest ?
                 ['label' => 'Iniciar sesión', 'url' => ['/site/login']] :
                 [
-                    'label' => 'Salir (' . Yii::$app->user->identity->username . ')',
+                    'label' => 'Salir (' . Yii::$app->user->identity->NOMBRE_USUARIO . ')',
                     'url' => ['/site/logout'],
                     'linkOptions' => ['data-method' => 'post']
-                ],*/
+                ],
         ],
     ]);
     NavBar::end();
