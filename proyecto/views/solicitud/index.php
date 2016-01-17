@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Url;
 use app\models\TipoViajeForm;
+use app\models\Estadosolicitud;
 
 $this->title = 'Lista de Solicitudes';
 $this->params['breadcrumbs'][] = $this->title;
@@ -21,15 +22,15 @@ $this->params['breadcrumbs'][] = $this->title;
     </tr>
     <?php foreach($model as $row): ?>
     <tr>
-        <td><?= $row->ID_SOLICITUD ?></td>
-        <td><?= $row->ESTADO_SOLICITUD ?></td>
+        <td><?= $row->ID_SOLICITUD; ?></td>
+        <td><?= Estadosolicitud::findOne($row -> ID_ESTADO) -> ESTADO; ?></td>
         <!--<td><?= $row->ID_TIPO_DE_VIAJE ?></td>-->
         <td><?= TipoViajeForm::nombrePorID($row->ID_TIPO_DE_VIAJE)->NOMBRE_TIPO_DE_VIAJE; ?></td>
         <!--<td>$<?= TipoViajeForm::nombrePorID($row->ID_TIPO_DE_VIAJE)->MONTO_MAXIMO; ?></td> -->
         <td><?= $row->FECHA_SOLICITUD ?></td>
         <td width="400"><?= $row->CUERPO_SOLICITUD ?></td>
         <td><a href="<?= Url::toRoute(["solicitud/detalle", "ID_SOLICITUD" => $row->ID_SOLICITUD]) ?>">Ver Detalle</a></td>
-        <?php if($row->ESTADO_SOLICITUD == "Aprobado") 
+        <?php if(Estadosolicitud::find($row -> ID_ESTADO)->one() -> ESTADO == "Aprobado") 
                   echo '<td><a href="'.Url::toRoute(["site/pdf", "ID_SOLICITUD" => $row->ID_SOLICITUD]).'">Generar PDF</a></td>';
               else
                   echo '<td><strong></strong></td>';

@@ -50,7 +50,7 @@ class SolicitudesController extends controller {
       if($model -> validate()){
         $modelsolicitud = SolicitudFormulario::findOne($_GET["ID_SOLICITUD"]);
         if($modelsolicitud){
-          $modelsolicitud-> ESTADO_SOLICITUD = $model -> ESTADO_SOLICITUD;
+          $modelsolicitud-> ID_ESTADO = $model -> ID_ESTADO;
           }
 
           if($modelsolicitud -> update()){
@@ -69,7 +69,7 @@ class SolicitudesController extends controller {
       if ((int) $ID_SOLICITUD){
                 $modelsolicitud = SolicitudTabla::findOne($ID_SOLICITUD);
                 if ($modelsolicitud) {
-                  $model -> ESTADO_SOLICITUD = $modelsolicitud -> ESTADO_SOLICITUD;  
+                  $model -> ID_ESTADO = $modelsolicitud -> ID_ESTADO;  
                 }
                 else{
                        $msg = "Tabla no encontrada";

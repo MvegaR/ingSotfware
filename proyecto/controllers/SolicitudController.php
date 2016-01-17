@@ -145,7 +145,7 @@ class SolicitudController extends Controller{
             $tablesolicitud->ID_TIPO_DE_VIAJE = $model->idtipoviaje;
             $tablesolicitud->ID_VIAJE = $ultimoidviaje;
             $tablesolicitud->FECHA_SOLICITUD = date("Y-m-d H:i:s");
-            $tablesolicitud->ESTADO_SOLICITUD = "En espera de revision";
+            $tablesolicitud->ID_ESTADO = 1;
             $tablesolicitud->CUERPO_SOLICITUD = $model->cuerpo;
             $tablesolicitud->insert();
     	    $tablesolicitud = new Solicitud;

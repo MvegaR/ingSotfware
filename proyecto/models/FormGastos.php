@@ -13,6 +13,7 @@ public $nombregasto;
 public $montogasto;
 public $fechagasto;
 
+
 public function rules()
  {
   return [

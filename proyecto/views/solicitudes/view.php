@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use app\models\Estadosolicitud;
 
 $this->title = 'Lista de solicitudes';
 $this->params['breadcrumbs'][] = $this->title;
@@ -21,12 +22,15 @@ $this->params['breadcrumbs'][] = $this->title;
 </tr>
 </thead>
 <tbody>
-<?php foreach($model as $solicitud): ?>
+<?php foreach($model as $solicitud): 
+?>
 <tr>
 	<td><?= $solicitud -> ID_SOLICITUD ?></td>
 	<td><?= $solicitud -> ID_USUARIO ?></td>
 	<td><?= $solicitud -> CUERPO_SOLICITUD ?></td>
-	<td><?= $solicitud -> ESTADO_SOLICITUD ?> <a href = "<?= Url::toRoute(["solicitudes/update", "ID_SOLICITUD" => $solicitud -> ID_SOLICITUD])?>">Editar</a></td>
+	<td><?= Estadosolicitud::findOne($solicitud -> ID_ESTADO) -> ESTADO; ?> <a href = "<?= Url::toRoute(["solicitudes/update", "ID_SOLICITUD" => $solicitud -> ID_SOLICITUD])?>">Editar</a></td>
+	
+
 	<th> <a href = "<?= Url::toRoute(["solicitudes/detalle", "ID_SOLICITUD" => $solicitud -> ID_SOLICITUD])?>">Detalles</a>
 <?php endforeach ?>
 </table>	

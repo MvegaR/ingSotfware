@@ -22,7 +22,7 @@
 	public function rules()
 	{
 		return[
-				["ESTADO_SOLICITUD", "required", "message" => "Campo requerido."]
+				["ID_ESTADO", "required", "message" => "Campo requerido."]
 
 				];
 

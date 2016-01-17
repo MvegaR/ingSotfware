@@ -10,7 +10,7 @@ class Usuario extends \yii\db\ActiveRecord{
 	public $id_usuario;
 		#public $nombre_usuario;
 	public $id_departamento;
-	public $rol;
+	public $id_rol;
 		#public $email;
 	public $password;
 	public $password_repeat;
@@ -29,7 +29,7 @@ class Usuario extends \yii\db\ActiveRecord{
 		["NOMBRE_USUARIO", "match", "pattern" => "/^[a-záéíóúñ]+$/i", "message" => "Solo se aceptan letras"],
 		#["NOMBRE_USUARIO", "match", "pattern" => "/^[ ]+$/i","not" => true, "message" => "No se acepta espacios."],
 		["id_departamento", "integer", "message" => "Debe de ser un número"],
-		["rol", "required", "message" => "Campo requerido."],
+		["id_rol", "required", "message" => "Campo requerido."],
 		["EMAIL", "required", "message" => "Campo requerido."],
 		["EMAIL", "email", "message" => "Debe ser un Email valido."],
 		["EMAIL", "unique", "on" => "insert", "message" => "Email ya registrado"],
@@ -46,7 +46,7 @@ class Usuario extends \yii\db\ActiveRecord{
 
 		return [
 		"NOMBRE_USUARIO" => "Nombre de usuario", "id_departamento" => "Departamento", 
-		"rol" => "Rol del usuario", "password" => "Contraseña", "password_repeat" => "Repita contraseña", "reCaptcha" => "Verifique su humanidad"];
+		"id_rol" => "Rol del usuario", "password" => "Contraseña", "password_repeat" => "Repita contraseña", "reCaptcha" => "Verifique su humanidad"];
 
 	}
 

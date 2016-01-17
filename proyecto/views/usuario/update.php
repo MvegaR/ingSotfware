@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use himiklab\yii2\recaptcha\ReCaptcha;
 use yii\helpers\ArrayHelper;
 use app\models\DepartamentoTabla;
+use app\models\ROL;
 $this->title = 'Editar usuario';
 $this -> params['breadcrumbs'][] = ["label" => "Lista de usuarios", "url" => ["usuario/view"]];
 $this->params['breadcrumbs'][] = $this->title;
@@ -30,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			ArrayHelper::Map(DepartamentoTabla::find() -> all(),"ID_DEPARTAMENTO", "NOMBRE_DEPARTAMENTO" ), ["prompt" => "Sin informar"] 
 		);?>
 
-<?= $form -> field($model, "rol") -> dropDownList(["docente" => "Docente","decano" => "Decano", "director" => "Director", "administrador" => "Admnistrador",]) ?>
+<?= $form -> field($model, "id_rol") -> dropDownList(ArrayHelper::Map(ROL::find() -> all(), "ID_ROL", "ROL")); ?>
 
 <?= $form -> field($model, "EMAIL") -> input("email"); ?>
 

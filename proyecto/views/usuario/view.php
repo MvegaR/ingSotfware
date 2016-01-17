@@ -2,6 +2,7 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use app\models\DepartamentoTabla;
+use app\models\ROL;
 
 $this->title = 'Lista de usuarios';
 $this->params['breadcrumbs'][] = $this->title;
@@ -27,10 +28,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <tr>
 	<th><?= $usuario -> ID_USUARIO ?></th>
 	<th><?= $usuario -> NOMBRE_USUARIO ?></th>
-	<th><?= $usuario -> ROL ?></th>
-	<th><?php if($usuario -> ID_DEPARTAMENTO != ""){echo (DepartamentoTabla::find($usuario -> ID_DEPARTAMENTO)->one() -> NOMBRE_DEPARTAMENTO);}else{echo "Sin informar";} ?></th>
+	<th><?= (ROL::findOne($usuario -> ID_ROL) -> ROL); ?></th>
+	<th><?php if($usuario -> ID_DEPARTAMENTO != ""){echo (DepartamentoTabla::findOne($usuario -> ID_DEPARTAMENTO) -> NOMBRE_DEPARTAMENTO);}else{echo "Sin informar";} ?></th>
 	<th><?= $usuario -> EMAIL ?></th>
-	<th> <a href = "<?= Url::toRoute(["usuario/update", "id_usuario" => $usuario -> ID_USUARIO])?>">Editar</a> | <?php if($usuario -> ROL != "administrador"){ ?>
+	<th> <a href = "<?= Url::toRoute(["usuario/update", "id_usuario" => $usuario -> ID_USUARIO])?>">Editar</a> | <?php if($usuario -> ID_ROL != 4){ ?>
 <a href="#" data-toggle="modal" data-target="#ID_USUARIO<?= $usuario->ID_USUARIO ?>">Eliminar</a>
 
 <div class="modal fade" role="dialog" aria-hidden="true" id="ID_USUARIO<?= $usuario->ID_USUARIO ?>">

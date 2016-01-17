@@ -6,6 +6,7 @@ use yii\helpers\Url;
 use himiklab\yii2\recaptcha\ReCaptcha;
 use yii\helpers\ArrayHelper;
 use app\models\DepartamentoTabla;
+use app\models\ROL;
 
 $this->title = 'Crear usuario';
 $this -> params['breadcrumbs'][] = ["label" => "Lista de usuarios", "url" => ["usuario/view"]];
@@ -35,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			);
 	?>
 
-	<?= $form -> field($model, "rol") -> dropDownList(["docente" => "Docente","decano" => "Decano", "director" => "Director", "administrador" => "Admnistrador",]) ?>
+	<?= $form -> field($model, "id_rol") -> dropDownList(ArrayHelper::Map(ROL::find() -> all(), "ID_ROL", "ROL")); ?>
 
 	<?= $form -> field($model, "EMAIL") -> input("email"); ?>
 

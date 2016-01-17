@@ -37,7 +37,7 @@
             <?php foreach ($solicitudes as $row): ?>
                 <tr>
                     <td><?php echo $contador; $contador++;?></td>
-                    <td><?php echo $row['ESTADO_SOLICITUD']; ?></td>
+                    <td><?php  echo Estadosolicitud::find($row -> ID_ESTADO)->one() -> ESTADO; ?></td>
                     <td><?php echo $row['NOMBRE_TIPO_DE_VIAJE']; ?></td>
                     <td>$<?php echo $row['MONTO_MAXIMO']; ?></td>
                     <td><?php echo $row['FECHA_SOLICITUD']; ?></td>

@@ -37,7 +37,7 @@ class UsuarioController extends controller{
 				if($tabla){
 					$tabla -> NOMBRE_USUARIO = $model -> NOMBRE_USUARIO;
 					$tabla -> ID_DEPARTAMENTO = $model -> id_departamento;
-					$tabla -> ROL = $model -> rol;
+					$tabla -> ID_ROL = $model -> id_rol;
 					$tabla -> EMAIL = $model -> EMAIL;
 					if($tabla -> PASSWORD != $model -> password){
 						$tabla -> PASSWORD = sha1($model -> password);
@@ -65,7 +65,7 @@ class UsuarioController extends controller{
 					$model -> id_usuario = $tabla -> ID_USUARIO;
 					$model -> NOMBRE_USUARIO = $tabla -> NOMBRE_USUARIO;
 					$model -> id_departamento = $tabla -> ID_DEPARTAMENTO;
-					$model -> rol = $tabla -> ROL;
+					$model -> id_rol = $tabla -> ID_ROL;
 					$model -> EMAIL = $tabla -> EMAIL;
 					$model -> password = $tabla -> PASSWORD;
 					$model -> password_repeat = $tabla -> PASSWORD;
@@ -113,9 +113,13 @@ class UsuarioController extends controller{
 		if($model-> load(Yii::$app->request->post())){
 			if($model -> validate()){
 				$table = new UsuarioTabla;
+
 				$table -> NOMBRE_USUARIO = $model -> NOMBRE_USUARIO;
 				$table -> ID_DEPARTAMENTO = $model -> id_departamento;
-				$table -> ROL = $model -> rol;
+				
+
+				$table -> ID_ROL = $model -> id_rol;
+
 				$table -> EMAIL = $model -> EMAIL;
 				$table -> PASSWORD = sha1($model -> password);
 				$table -> ID_USUARIO = null;

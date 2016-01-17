@@ -3,6 +3,8 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
+use app\models\Estadosolicitud;
+
 
 
 $this->title = 'Detalles';
@@ -19,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
     'enableClientValidation' => true,]
 );
 ?>
-<?= $form -> field($model, "ESTADO_SOLICITUD") -> dropDownList(["En espera de revisión"=>"En espera de revisión","Aprobado"=> "Aprobado", "Rechazado"=>"Rechazado",])  ?>
+<?= $form -> field($model, "ID_ESTADO") -> dropDownList(ArrayHelper::Map(Estadosolicitud::find()->all(), "ID_ESTADO", "ESTADO"))  ?>
 
 <?= Html::submitButton("Guardar Cambio", ["class" => "btn btn-primary"]);?>
 

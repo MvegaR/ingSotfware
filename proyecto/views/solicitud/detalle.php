@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Url;
 use app\models\TipoViajeForm;
-
+use app\models\Estadosolicitud;
 $this->title = 'Detalle Solicitud';
 $this->params['breadcrumbs'][] = ["label" => "Lista de Solicitudes", "url" => ["/solicitud"]];
 $this->params['breadcrumbs'][] = $this->title;
@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </tr>
     <tr>
         <td><?= $modelsolicitud->ID_SOLICITUD ?></td>
-        <td><?= $modelsolicitud->ESTADO_SOLICITUD ?></td>
+        <td><?= Estadosolicitud::find($modelsolicitud -> ID_ESTADO)->one() -> ESTADO;?></td>
         <!--<td><?= $modelsolicitud->ID_TIPO_DE_VIAJE ?></td>-->
         <td><?= TipoViajeForm::nombrePorID($modelsolicitud->ID_TIPO_DE_VIAJE)->NOMBRE_TIPO_DE_VIAJE; ?></td>
         <td>$<?= TipoViajeForm::nombrePorID($modelsolicitud->ID_TIPO_DE_VIAJE)->MONTO_MAXIMO; ?></td>
