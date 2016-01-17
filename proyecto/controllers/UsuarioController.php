@@ -39,6 +39,8 @@ class UsuarioController extends controller{
 					$tabla -> ID_DEPARTAMENTO = $model -> id_departamento;
 					$tabla -> ID_ROL = $model -> id_rol;
 					$tabla -> EMAIL = $model -> EMAIL;
+					$tabla -> generateAuthKey();
+					$tabla -> generateAccessToken();
 					if($tabla -> PASSWORD != $model -> password){
 						$tabla -> PASSWORD = sha1($model -> password);
 					}
@@ -123,8 +125,8 @@ class UsuarioController extends controller{
 				$table -> EMAIL = $model -> EMAIL;
 				$table -> PASSWORD = sha1($model -> password);
 				$table -> ID_USUARIO = null;
-				$table -> AUTHKEY = "asdf";
-				$table -> ACCESSTOKEN = "asdf";
+				$table -> generateAuthKey();
+				$table -> generateAccessToken();
 				if($table -> insert()){
 					$msg = '<div class="alert alert-success" role="alert">Registro insertado correctamente</div>';
 					$model = new Usuario();

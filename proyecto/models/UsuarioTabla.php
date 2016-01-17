@@ -29,8 +29,11 @@ class UsuarioTabla extends \yii\db\ActiveRecord implements \yii\web\IdentityInte
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-    	return static::findOne(['access_token' => $token]);
+    	return static::findOne(['ACCESSTOKEN' => $token]);
     }
+
+
+
 
     /**
      * @return int|string current user ID
@@ -47,6 +50,16 @@ class UsuarioTabla extends \yii\db\ActiveRecord implements \yii\web\IdentityInte
     {
     	return $this->AUTHKEY;
     }
+
+    	public function generateAuthKey()
+	{
+	    $this->AUTHKEY = Yii::$app->security->generateRandomString();
+	}
+
+		public function generateAccessToken()
+	{
+	    $this->ACCESSTOKEN = Yii::$app->security->generateRandomString();
+	}
 
     /**
      * @param string $authKey

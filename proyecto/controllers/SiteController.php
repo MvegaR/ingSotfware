@@ -32,102 +32,102 @@ class SiteController extends Controller
 	}
 
 	public function actionPdf(){
-            if (Yii::$app->request->get("ID_SOLICITUD")){
-                $ID_SOLICITUD = Html::encode($_GET["ID_SOLICITUD"]);
-		$mpdf = new mPDF;
-		$connection = new \yii\db\Connection(Yii::$app->db);
-		$connection -> open();
+		if (Yii::$app->request->get("ID_SOLICITUD")){
+			$ID_SOLICITUD = Html::encode($_GET["ID_SOLICITUD"]);
+			$mpdf = new mPDF;
+			$connection = new \yii\db\Connection(Yii::$app->db);
+			$connection -> open();
 ///////////////////////////////////////////////////////////////////
-		$sql = "Select ID_SOLICITUD, ID_TIPO_DE_VIAJE, ID_VIAJE, FECHA_SOLICITUD, CUERPO_SOLICITUD from SOLICITUD_DE_VIAJE where ID_SOLICITUD=".$ID_SOLICITUD;
-		$command = $connection -> createCommand($sql);
-		$dataReader = $command -> query();
-		$str = "<h1>RENDICION DE GASTOS</h1><h2>- SOLICITUD:</h2><table border=1 cellspacing=0 cellpadding=2><tbody><tr><td>ID</td><td>FECHA SOLICITUD</td><td>CUERPO SOLICITUD</td></tr>";
-                $dos = 1;
-                foreach($dataReader as $row) {
-                        $ID_TIPO_DE_VIAJE = $row->ID_TIPO_DE_VIAJE;
-			$str = $str."<tr>";
-			foreach ($row as $col) {
-                                if($dos == 2) $ID_TIPO_DE_VIAJE = $col;
-                                else if($dos == 3) $ID_VIAJE = $col;
-				else $str = $str."<td>".$col."</td>";
-                                $dos = $dos+1;
+			$sql = "Select ID_SOLICITUD, ID_TIPO_DE_VIAJE, ID_VIAJE, FECHA_SOLICITUD, CUERPO_SOLICITUD from SOLICITUD_DE_VIAJE where ID_SOLICITUD=".$ID_SOLICITUD;
+			$command = $connection -> createCommand($sql);
+			$dataReader = $command -> query();
+			$str = "<h1>RENDICION DE GASTOS</h1><h2>- SOLICITUD:</h2><table border=1 cellspacing=0 cellpadding=2><tbody><tr><td>ID</td><td>FECHA SOLICITUD</td><td>CUERPO SOLICITUD</td></tr>";
+			$dos = 1;
+			foreach($dataReader as $row) {
+				$ID_TIPO_DE_VIAJE = $row->ID_TIPO_DE_VIAJE;
+				$str = $str."<tr>";
+				foreach ($row as $col) {
+					if($dos == 2) $ID_TIPO_DE_VIAJE = $col;
+					else if($dos == 3) $ID_VIAJE = $col;
+					else $str = $str."<td>".$col."</td>";
+					$dos = $dos+1;
+				}
+				$str = $str."</tr>";
 			}
-			$str = $str."</tr>";
-		}
-		$str = $str."</tbody></table>";
-		
-		$mpdf -> WriteHTML($str);
+			$str = $str."</tbody></table>";
+			
+			$mpdf -> WriteHTML($str);
 ///////////////////////////////////////////////////////////////////
-		$sql = "Select * from TIPO_DE_VIAJE where ID_TIPO_DE_VIAJE='".$ID_TIPO_DE_VIAJE."'";
-		$command = $connection -> createCommand($sql);
-		$dataReader = $command -> query();
-		$str = "<h2>- TIPO DE VIAJE DE LA SOLICITUD:</h2><table border=1 cellspacing=0 cellpadding=2><tbody><tr><td>ID</td><td>NOMBRE TIPO DE VIAJE</td><td>MONTO TIPO DE VIAJE</td></tr>";
-		foreach($dataReader as $row) { 
-			$str = $str."<tr>";
-			foreach ($row as $col) {
-				$str = $str."<td>".$col."</td>";
+			$sql = "Select * from TIPO_DE_VIAJE where ID_TIPO_DE_VIAJE='".$ID_TIPO_DE_VIAJE."'";
+			$command = $connection -> createCommand($sql);
+			$dataReader = $command -> query();
+			$str = "<h2>- TIPO DE VIAJE DE LA SOLICITUD:</h2><table border=1 cellspacing=0 cellpadding=2><tbody><tr><td>ID</td><td>NOMBRE TIPO DE VIAJE</td><td>MONTO TIPO DE VIAJE</td></tr>";
+			foreach($dataReader as $row) { 
+				$str = $str."<tr>";
+				foreach ($row as $col) {
+					$str = $str."<td>".$col."</td>";
+				}
+				$str = $str."</tr>";
 			}
-			$str = $str."</tr>";
-		}
-		$str = $str."</tbody></table>";
-		
-		$mpdf -> WriteHTML($str);
+			$str = $str."</tbody></table>";
+			
+			$mpdf -> WriteHTML($str);
 ///////////////////////////////////////////////////////////////////
-		$sql = "Select * from VIAJE where ID_VIAJE='".$ID_VIAJE."'";
-		$command = $connection -> createCommand($sql);
-		$dataReader = $command -> query();
-		$str = "<h2>- VIAJE DE LA SOLICITUD:</h2><table border=1 cellspacing=0 cellpadding=2><tbody><tr><td>ID</td><td>ORIGEN</td><td>FECHA INICIO</td><td>FECHA TERMINO</td></tr>";
-		foreach($dataReader as $row) { 
-			$str = $str."<tr>";
-			foreach ($row as $col) {
-				$str = $str."<td>".$col."</td>";
+			$sql = "Select * from VIAJE where ID_VIAJE='".$ID_VIAJE."'";
+			$command = $connection -> createCommand($sql);
+			$dataReader = $command -> query();
+			$str = "<h2>- VIAJE DE LA SOLICITUD:</h2><table border=1 cellspacing=0 cellpadding=2><tbody><tr><td>ID</td><td>ORIGEN</td><td>FECHA INICIO</td><td>FECHA TERMINO</td></tr>";
+			foreach($dataReader as $row) { 
+				$str = $str."<tr>";
+				foreach ($row as $col) {
+					$str = $str."<td>".$col."</td>";
+				}
+				$str = $str."</tr>";
 			}
-			$str = $str."</tr>";
-		}
-		$str = $str."</tbody></table>";
-		
-		$mpdf -> WriteHTML($str);
+			$str = $str."</tbody></table>";
+			
+			$mpdf -> WriteHTML($str);
 ///////////////////////////////////////////////////////////////////
-		$sql = "Select ID_DESTINO, DURACION_VIAJE_DIAS, MEDIO_DE_TRANSPORTE, CIUDAD_DESTINO, PAIS_DESTINO from DESTINO where ID_VIAJE='".$ID_VIAJE."'";
-		$command = $connection -> createCommand($sql);
-		$dataReader = $command -> query();
-		$str = "<h2>- DESTINO(S) DEL VIAJE:</h2><table border=1 cellspacing=0 cellpadding=2><tbody><tr><td>ID</td><td>DURACION</td><td>MEDIO DE TRANSPORTE</td><td>CIUDAD DESTINO</td><td>PAIS DESTINO</td></tr>";
-		foreach($dataReader as $row) { 
-			$str = $str."<tr>";
-			foreach ($row as $col) {
-				$str = $str."<td>".$col."</td>";
+			$sql = "Select ID_DESTINO, DURACION_VIAJE_DIAS, MEDIO_DE_TRANSPORTE, CIUDAD_DESTINO, PAIS_DESTINO from DESTINO where ID_VIAJE='".$ID_VIAJE."'";
+			$command = $connection -> createCommand($sql);
+			$dataReader = $command -> query();
+			$str = "<h2>- DESTINO(S) DEL VIAJE:</h2><table border=1 cellspacing=0 cellpadding=2><tbody><tr><td>ID</td><td>DURACION</td><td>MEDIO DE TRANSPORTE</td><td>CIUDAD DESTINO</td><td>PAIS DESTINO</td></tr>";
+			foreach($dataReader as $row) { 
+				$str = $str."<tr>";
+				foreach ($row as $col) {
+					$str = $str."<td>".$col."</td>";
+				}
+				$str = $str."</tr>";
 			}
-			$str = $str."</tr>";
-		}
-		$str = $str."</tbody></table>";
-		
-		$mpdf -> WriteHTML($str);
+			$str = $str."</tbody></table>";
+			
+			$mpdf -> WriteHTML($str);
 ///////////////////////////////////////////////////////////////////
-		$sql = "Select ID_GASTO, NOMBRE_GASTO, MONTO_GASTO, FECHA_GASTO from GASTOS where ID_VIAJE='".$ID_VIAJE."'";
-		$command = $connection -> createCommand($sql);
-		$dataReader = $command -> query();
-		$str = "<h2>- GASTO(s) ASOCIADOS AL VIAJE:</h2><table border=1 cellspacing=0 cellpadding=2><tbody><tr><td>ID</td><td>NOMBRE</td><td>MONTO</td><td>FECHA</td></tr>";
-		$id_gasto = 1;
-                foreach($dataReader as $row) { 
-			$str = $str."<tr>";
-			foreach ($row as $col) {
-                                if($id_gasto == 1) $ID_GASTO = $col;
-                                $id_gasto++; 
-				$str = $str."<td>".$col."</td>";
+			$sql = "Select ID_GASTO, NOMBRE_GASTO, MONTO_GASTO, FECHA_GASTO from GASTOS where ID_VIAJE='".$ID_VIAJE."'";
+			$command = $connection -> createCommand($sql);
+			$dataReader = $command -> query();
+			$str = "<h2>- GASTO(s) ASOCIADOS AL VIAJE:</h2><table border=1 cellspacing=0 cellpadding=2><tbody><tr><td>ID</td><td>NOMBRE</td><td>MONTO</td><td>FECHA</td></tr>";
+			$id_gasto = 1;
+			foreach($dataReader as $row) { 
+				$str = $str."<tr>";
+				foreach ($row as $col) {
+					if($id_gasto == 1) $ID_GASTO = $col;
+					$id_gasto++; 
+					$str = $str."<td>".$col."</td>";
+				}
+				$str = $str."</tr>";
 			}
-			$str = $str."</tr>";
+			$str = $str."</tbody></table>";
+			
+			$mpdf -> WriteHTML($str);
+///////////////////////////////////////////////////////////////////
+			$str = "<h2>- IMAGEN(ES) ASOCIADAS A CADA GASTO:</h2>";
+			$mpdf -> WriteHTML($str);
+///////////////////////////////////////////////////////////////////
+			$mpdf -> Output();
+			$connection -> close();
+			exit;
 		}
-		$str = $str."</tbody></table>";
-		
-		$mpdf -> WriteHTML($str);
-///////////////////////////////////////////////////////////////////
-		$str = "<h2>- IMAGEN(ES) ASOCIADAS A CADA GASTO:</h2>";
-		$mpdf -> WriteHTML($str);
-///////////////////////////////////////////////////////////////////
-		$mpdf -> Output();
-		$connection -> close();
-		exit;
-            }
 	}
 	
 	
@@ -355,7 +355,7 @@ class SiteController extends Controller
 		{
 			if($model->validate())
 			{
-                              
+				
 				$table = Gastos::findOne($model->ID_GASTO);
 				//var_dump(isset($model));
 				//print_r($model);
