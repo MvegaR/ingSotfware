@@ -8,6 +8,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use app\models\ROL;
 
 AppAsset::register($this);
 ?>
@@ -26,6 +27,87 @@ AppAsset::register($this);
 
 <div class="wrap">
     <?php
+
+    function guest(){
+        return [
+        'options' => ['class' => 'navbar-nav navbar-right'],
+        'items' => [
+            ['label' => 'Inicio', 'url' => ['/site/index']],
+             
+                ['label' => 'Iniciar sesión', 'url' => ['/site/login']],
+        ],
+    ];
+    }
+
+    function administrador(){
+        return [
+        'options' => ['class' => 'navbar-nav navbar-right'],
+        'items' => [
+            ['label' => 'Inicio', 'url' => ['/site/index']],
+            ['label' => 'Gestión usuarios', 'url' => ['/usuario/view']],
+            ['label' => 'Gestión Tipos Viaje', 'url' => ['/site/ver-t-viaje']],
+                [
+                    'label' => 'Salir (' . Yii::$app->user->identity->NOMBRE_USUARIO . ')',
+                    'url' => ['/site/logout'],
+                    'linkOptions' => ['data-method' => 'post']
+                ],
+        ],
+    ];
+    }
+
+    function decano(){
+        return [
+        'options' => ['class' => 'navbar-nav navbar-right'],
+        'items' => [
+            ['label' => 'Inicio', 'url' => ['/site/index']],
+            ['label' => 'Realizar solicitud', 'url' => ['/solicitud/index']],
+            ['label' => 'Gestion de gastos', 'url' => ['/site/view']],
+            ['label' => 'Evaluar solicitudes', 'url' => ['/solicitudes/view']],
+                [
+                    'label' => 'Salir (' . Yii::$app->user->identity->NOMBRE_USUARIO . ')',
+                    'url' => ['/site/logout'],
+                    'linkOptions' => ['data-method' => 'post']
+                ],
+        ],
+    ];
+    }
+
+    function director(){
+        return [
+        'options' => ['class' => 'navbar-nav navbar-right'],
+        'items' => [
+            ['label' => 'Inicio', 'url' => ['/site/index']],
+            ['label' => 'Realizar solicitud', 'url' => ['/solicitud/index']],
+             ['label' => 'Gestion de gastos', 'url' => ['/site/view']],
+            ['label' => 'Evaluar solicitudes', 'url' => ['/solicitudes/view']],
+                [
+                    'label' => 'Salir (' . Yii::$app->user->identity->NOMBRE_USUARIO . ')',
+                    'url' => ['/site/logout'],
+                    'linkOptions' => ['data-method' => 'post']
+                ],
+        ],
+    ];
+    }
+
+    function docente(){
+        return [
+        'options' => ['class' => 'navbar-nav navbar-right'],
+        'items' => [
+            ['label' => 'Inicio', 'url' => ['/site/index']],
+            ['label' => 'Realizar solicitud', 'url' => ['/solicitud/index']],
+            ['label' => 'Gestion de gastos', 'url' => ['/site/view']],
+           
+                [
+                    'label' => 'Salir (' . Yii::$app->user->identity->NOMBRE_USUARIO . ')',
+                    'url' => ['/site/logout'],
+                    'linkOptions' => ['data-method' => 'post']
+                ],
+        ],
+    ];
+    }
+
+
+
     NavBar::begin([
         'brandLabel' => 'ICINF3',
         'brandUrl' => Yii::$app->homeUrl,
@@ -33,26 +115,20 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Inicio', 'url' => ['/site/index']],
-            ['label' => 'Gestion de gastos', 'url' => ['/site/view']],
-            ['label' => 'Gestión usuarios', 'url' => ['/usuario/view']],
-            ['label' => 'Gestión Tipos Viaje', 'url' => ['/site/ver-t-viaje']],
-            ['label' => 'Solicitudes (Docente)', 'url' => ['/solicitud/index']],
-            ['label' => 'Solicitudes (Evaluador)', 'url' => ['/solicitudes/view']],
-           # ['label' => 'About', 'url' => ['/site/about']],
-            # ['label' => 'Contact', 'url' => ['/site/contact']],
-             Yii::$app->user->isGuest ?
-                ['label' => 'Iniciar sesión', 'url' => ['/site/login']] :
-                [
-                    'label' => 'Salir (' . Yii::$app->user->identity->NOMBRE_USUARIO . ')',
-                    'url' => ['/site/logout'],
-                    'linkOptions' => ['data-method' => 'post']
-                ],
-        ],
-    ]);
+    $rol = "Guest";
+    if(! Yii::$app->user->isGuest)
+        $rol = (ROL::findOne(Yii::$app -> user -> identity -> ID_ROL) -> ROL);
+    
+    if($rol == "Guest")
+        echo Nav::widget(guest());
+    else if($rol == "Administrador")
+        echo Nav::widget(administrador());
+    else if($rol == "Decano")
+        echo Nav::widget(decano());
+    else if($rol == "Director")
+        echo Nav::widget(director());
+    else if($rol == "Docente")
+        echo Nav::widget(docente());
     NavBar::end();
     ?>
 

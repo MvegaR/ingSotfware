@@ -15,6 +15,7 @@ class PermisosController extends Controller{
 		if( $rol != "Administrador"){
 			throw new UnauthorizedHttpException("Su rol de usuario no tiene los privilegios necesarios para realizar esta operación.");
 		}
+		return $rol;
 
 	}
 	public static function permisoDocente(){
@@ -26,6 +27,7 @@ class PermisosController extends Controller{
 		if( $rol != "Docente"){
 			throw new UnauthorizedHttpException("Su rol de usuario no tiene los privilegios necesarios para realizar esta operación.");
 		}
+		return $rol;
 
 	}
 	public static function permisoDecano(){
@@ -37,7 +39,7 @@ class PermisosController extends Controller{
 		if( $rol != "Decano"){
 			throw new UnauthorizedHttpException("Su rol de usuario no tiene los privilegios necesarios para realizar esta operación.");
 		}
-
+		return $rol;
 	}
 
 	public static function permisoDirector(){
@@ -49,7 +51,7 @@ class PermisosController extends Controller{
 		if( $rol != "Director"){
 			throw new UnauthorizedHttpException("Su rol de usuario no tiene los privilegios necesarios para realizar esta operación.");
 		}
-
+		return $rol;
 	}
 
 	public static function permisoDocenteDirector(){
@@ -61,6 +63,7 @@ class PermisosController extends Controller{
 		if( $rol != "Docente" && $rol != "Director"){
 			throw new UnauthorizedHttpException("Su rol de usuario no tiene los privilegios necesarios para realizar esta operación.");
 		}
+		return $rol;
 
 	}
 
@@ -73,6 +76,20 @@ class PermisosController extends Controller{
 		if( $rol != "Docente" && $rol != "Decano"){
 			throw new UnauthorizedHttpException("Su rol de usuario no tiene los privilegios necesarios para realizar esta operación.");
 		}
+		return $rol;
+
+	}
+
+	public static function permisoDirectorDecano(){
+
+		if(Yii::$app->user->isGuest){
+			return Controller::redirect(["site/login"]);
+		}
+		$rol = (ROL::findOne(Yii::$app -> user -> identity -> ID_ROL) -> ROL);
+		if( $rol != "Director" && $rol != "Decano"){
+			throw new UnauthorizedHttpException("Su rol de usuario no tiene los privilegios necesarios para realizar esta operación.");
+		}
+		return $rol;
 
 	}
 
@@ -85,6 +102,7 @@ class PermisosController extends Controller{
 		if( $rol != "Docente" && $rol != "Director" && $rol != "Decano"){
 			throw new UnauthorizedHttpException("Su rol de usuario no tiene los privilegios necesarios para realizar esta operación.");
 		}
+		return $rol;
 
 	}
 
