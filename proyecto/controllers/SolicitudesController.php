@@ -26,8 +26,8 @@ class SolicitudesController extends controller {
 
       if($rol == "Decano"){
        $decano = "Select Distinct S.* 
-      From SOLICITUD_DE_VIAJE S, USUARIO U, DEPARTAMENTO D
-      WHERE (S.ID_USUARIO = U.ID_USUARIO or S.ID_USUARIO = ".Yii::$app -> user -> identity -> ID_USUARIO." ) AND (U.ID_DEPARTAMENTO = NULL or (D.ID_DEPARTAMENTO = U.ID_DEPARTAMENTO AND U.ID_DEPARTAMENTO = D.ID_DEPARTAMENTO) );";
+      From SOLICITUD_DE_VIAJE S, USUARIO U, DEPARTAMENTO D, ROL R
+      WHERE (S.ID_USUARIO = U.ID_USUARIO or S.ID_USUARIO = ".Yii::$app -> user -> identity -> ID_USUARIO." ) AND (U.ID_ROL = R.ID_ROL AND (R.ROL = 'Director' or R.ROL = 'Decano' )) AND (U.ID_DEPARTAMENTO = NULL or (D.ID_DEPARTAMENTO = U.ID_DEPARTAMENTO AND U.ID_DEPARTAMENTO = D.ID_DEPARTAMENTO) );";
         return $this -> render("view", ["model" => $tabla -> findBySql($decano) -> all()] );
     }else{
         
