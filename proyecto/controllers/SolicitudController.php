@@ -20,6 +20,40 @@ class SolicitudController extends Controller{
     	return $this->render('index', ['model' => $modelsolicitud, 'msg' => $msg]);
     }
 
+
+    public function actionBorrarSolicitud()
+    {
+        $msg = null;
+        if(Yii::$app->request->post())
+        {
+            $ID_SOLICITUD = Html::encode($_POST["ID_SOLICITUD"]);
+            $ID_VIAJE = Html::encode($_POST["ID_VIAJE"]);
+            if((int) $ID_SOLICITUD)
+            {
+                if(Solicitud::deleteAll("ID_SOLICITUD=:ID_SOLICITUD", [":ID_SOLICITUD" => $ID_SOLICITUD]) &&
+                                   Destino::deleteAll("ID_VIAJE=:ID_VIAJE", [":ID_VIAJE" => $ID_VIAJE]) &&
+                                   Viaje::deleteAll("ID_VIAJE=:ID_VIAJE", [":ID_VIAJE" => $ID_VIAJE]))
+                {
+                    
+                    $msg = '<div class="alert alert-success" role="alert"><strong>Eliminada!</strong> Solicitud eliminada correctamente.</div>';
+                }
+                else
+                {
+                    $msg = '<div class="alert alert-danger" role="alert"><strong>Error!</strong> La solicitud no se elimino.</div>';
+                }
+            }
+            else
+            {
+                $msg = '<div class="alert alert-danger" role="alert"><strong>Error!</strong>La solicitud no se elimino.</div>';
+            }
+        }
+        $tablesolicitud = new Solicitud;
+        $modelsolicitud = $tablesolicitud->find()->where(['ID_USUARIO' => 1])->all();
+        return $this->render('index', ['model' => $modelsolicitud, 'msg' => $msg]);
+    }
+
+
+
     public function actionDetalle(){
         if (Yii::$app->request->get("ID_SOLICITUD")){
             $ID_SOLICITUD = Html::encode($_GET["ID_SOLICITUD"]);
@@ -159,36 +193,5 @@ class SolicitudController extends Controller{
     	    return $this->render('crear-solicitud',['model' => $model, 'tipos' => $modeltipos, 'msg' => $msg]);
     	}
     }
-
-	public function actionBorrarSolicitud()
-	{
-		$msg = null;
-		if(Yii::$app->request->post())
-		{
-			$ID_SOLICITUD = Html::encode($_POST["ID_SOLICITUD"]);
-			$ID_VIAJE = Html::encode($_POST["ID_VIAJE"]);
-			if((int) $ID_SOLICITUD)
-			{
-				if(Solicitud::deleteAll("ID_SOLICITUD=:ID_SOLICITUD", [":ID_SOLICITUD" => $ID_SOLICITUD]) &&
-                                   Destino::deleteAll("ID_VIAJE=:ID_VIAJE", [":ID_VIAJE" => $ID_VIAJE]) &&
-                                   Viaje::deleteAll("ID_VIAJE=:ID_VIAJE", [":ID_VIAJE" => $ID_VIAJE]))
-				{
-					
-					$msg = '<div class="alert alert-success" role="alert"><strong>Eliminada!</strong> Solicitud eliminada correctamente.</div>';
-				}
-				else
-				{
-					$msg = '<div class="alert alert-danger" role="alert"><strong>Error!</strong> La solicitud no se elimino.</div>';
-				}
-			}
-			else
-			{
-				$msg = '<div class="alert alert-danger" role="alert"><strong>Error!</strong>La solicitud no se elimino.</div>';
-			}
-		}
-    	$tablesolicitud = new Solicitud;
-        $modelsolicitud = $tablesolicitud->find()->where(['ID_USUARIO' => 1])->all();
-    	return $this->render('index', ['model' => $modelsolicitud, 'msg' => $msg]);
-	}
 
 }

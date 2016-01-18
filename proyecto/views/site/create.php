@@ -2,6 +2,8 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\Url;
+use app\models\Viaje;
+use yii\helpers\ArrayHelper;
 ?>
 
 <a href="<?=Url::toRoute("site/view")?>">Ir a lista completa de gastos</a>
@@ -15,7 +17,11 @@ use yii\helpers\Url;
 ?>
 
 <div class="form-group">
- <?=$form->field($model, "id_viaje")->input("text")->label("ID del Viaje") ?>   
+<?= $form -> field($model, "id_viaje") -> dropDownList(ArrayHelper::Map(Viaje::findBySql("SELECT DISTINCT J.*
+										FROM VIAJE J, USUARIO U, SOLICITUD_DE_VIAJE S
+										WHERE J.ID_VIAJE = S.ID_VIAJE
+										AND S.ID_USUARIO =".Yii::$app -> user -> identity -> ID_USUARIO) -> all(), "ID_VIAJE", "ID_VIAJE")); ?>
+
 </div>
 
 <div class="form-group">

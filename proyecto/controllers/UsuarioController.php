@@ -15,24 +15,20 @@ use app\models\DepartamentoTabla;
 use app\models\DepartamentoForm;
 use yii\helpers\Url;
 use yii\helpers\Html;
-
+use app\models\ROL;
 
 
 class UsuarioController extends Controller{
 
-	private function permiso($action){
-		
-
-	}
 
 	public function actionView(){
-
+		PermisosController::permisoAdministrador();
 		$tabla = new UsuarioTabla();
 		return $this -> render("View", ["model" => $tabla -> find() -> all()] );
 	}
 
 	public function actionUpdate(){
-
+		PermisosController::permisoAdministrador();
 		$model = new Usuario();
 		$msg = null;
 
@@ -91,7 +87,7 @@ class UsuarioController extends Controller{
 	}
 
 	public function actionDelete(){
-
+		PermisosController::permisoAdministrador();
 		if(Yii::$app -> request -> post()){
 			$id = Html::encode($_POST["ID_USUARIO"]);
 			if((int) $id){
@@ -114,6 +110,7 @@ class UsuarioController extends Controller{
 
 
 	public function actionCreate(){
+		PermisosController::permisoAdministrador();
 		$model = new Usuario();
 		$msg = null;
 
@@ -147,11 +144,13 @@ class UsuarioController extends Controller{
 	}
 
 	public function actionViewdep(){
+		PermisosController::permisoAdministrador();
 		$tabla = new DepartamentoTabla;
 		return $this -> render("ViewDepartamentos", ["model" => $tabla -> find() -> all()]);
 	}
 
 	public function actionCreatedep(){
+		PermisosController::permisoAdministrador();
 		$model = new DepartamentoForm;
 		$msg = null;
 
@@ -176,7 +175,7 @@ class UsuarioController extends Controller{
 	}
 
 	public function actionDeletedep(){
-
+		PermisosController::permisoAdministrador();
 		if(Yii::$app -> request -> post()){
 			$id = Html::encode($_POST["ID_DEPARTAMENTO"]);
 			if((int) $id){
@@ -199,7 +198,7 @@ class UsuarioController extends Controller{
 
 
 	public function actionUpdatedep(){
-
+		PermisosController::permisoAdministrador();
 		$model = new DepartamentoForm();
 		$msg = null;
 

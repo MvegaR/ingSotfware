@@ -32,6 +32,7 @@ class GastosasociadoController extends Controller
      */
     public function actionIndex()
     {
+        PermisosController::permisoDocenteDirectorDecano();
         $searchModel = new GastosasociadoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -48,6 +49,7 @@ class GastosasociadoController extends Controller
      */
     public function actionView($id)
     {
+        PermisosController::permisoDocenteDirectorDecano();
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -60,6 +62,7 @@ class GastosasociadoController extends Controller
      */
     public function actionCreate()
     {
+        PermisosController::permisoAdministrador();
         $model = new Gastosasociados();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -79,6 +82,7 @@ class GastosasociadoController extends Controller
      */
     public function actionUpdate($id)
     {
+        PermisosController::permisoAdministrador();
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -98,6 +102,7 @@ class GastosasociadoController extends Controller
      */
     public function actionDelete($id)
     {
+        PermisosController::permisoAdministrador();
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

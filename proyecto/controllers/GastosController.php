@@ -7,7 +7,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use app\models\FormGastos;
 use app\models\Gastos;
-
+//No se usa....
 class GastosController extends Controller{
 	
 	public $enableCsrfValidation = false;

@@ -22,22 +22,34 @@ use yii\base\Model;
 use yii\helpers\Url;
  //Para el PDF
 use mPDF;
+use yii\web\UnauthorizedHttpException;
 
 class SiteController extends Controller
 {
 
-	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/*INICIO PARTE RAMÓN 2*/
 	public function actionUpdategas()
     {
+    	PermisosController::permisoDocenteDirectorDecano();
         $model = new FormGastos;
         $msg = null;
         
         if($model->load(Yii::$app->request->post())) //esto falla, pero da true.
         {
-        	$table = GASTOS::findOne($model->ID_GASTO);
+        	//$table = GASTOS::findOne($model->ID_GASTO); //RAMON
+        	$table = Gastos::findBySql("SELECT DISTINCT G.*
+										FROM GASTOS G, VIAJE J, USUARIO U, SOLICITUD_DE_VIAJE S
+										WHERE G.ID_VIAJE = J.ID_VIAJE
+										AND J.ID_VIAJE = S.ID_VIAJE AND G.ID_GASTO = ".$model -> ID_GASTO.
+										" AND S.ID_USUARIO =".Yii::$app -> user -> identity -> ID_USUARIO) -> one();
+
+        	
+        	if(!$table) throw new UnauthorizedHttpException;
 
 			$model -> ID_GASTO = $table -> ID_GASTO;
-			$model -> id_viaje = $table -> ID_VIAJE; //por que falla hay que hacer esto, no sé por qué:
+			$model -> id_viaje = $table -> ID_VIAJE; 
+			//porque falla hay que hacer esto, no sé por qué:
 			$model -> estadogasto = (int)Yii::$app->request->post()["FormGastos"]["estadogasto"];
 			$model -> nombregasto = $table -> NOMBRE_GASTO;
 			$model -> montogasto = $table -> MONTO_GASTO;
@@ -66,7 +78,12 @@ class SiteController extends Controller
                     $msg = "El Gasto seleccionado no ha sido encontrado";
                 }
                 $table = new Gastos;
-				$model = $table->find()->all();
+				//$model = $table->find()->all();
+				$model = $table -> findBySql("SELECT DISTINCT G.*
+										FROM GASTOS G, VIAJE J, USUARIO U, SOLICITUD_DE_VIAJE S
+										WHERE G.ID_VIAJE = J.ID_VIAJE
+										AND J.ID_VIAJE = S.ID_VIAJE
+										AND S.ID_USUARIO =".Yii::$app -> user -> identity -> ID_USUARIO) -> all(); //MARCOS
 				return $this->render("formu", ["model" => $model, 'msg' => $msg]);
             }
             else
@@ -81,13 +98,18 @@ class SiteController extends Controller
             $ID_GASTO = Html::encode($_GET["ID_GASTO"]);
             if ((int) $ID_GASTO)
             {
-                $table = GASTOS::findOne($ID_GASTO);
+               // $table = GASTOS::findOne($ID_GASTO); //Ramón
+            	        	$table = Gastos::findBySql("SELECT DISTINCT G.*
+										FROM GASTOS G, VIAJE J, USUARIO U, SOLICITUD_DE_VIAJE S
+										WHERE G.ID_VIAJE = J.ID_VIAJE
+										AND J.ID_VIAJE = S.ID_VIAJE AND G.ID_GASTO = ".$ID_GASTO.
+										" AND S.ID_USUARIO =".Yii::$app -> user -> identity -> ID_USUARIO) -> one(); //Marcos
+        		if(!$table) throw new UnauthorizedHttpException;
+
                 if($table)
                 {
                    	$model->ID_GASTO = $table->ID_GASTO;
                     $model->estadogasto = $table->ID_ESTADO_GASTO;
-                   
-                   
                 }
                 else
                 {
@@ -107,11 +129,20 @@ class SiteController extends Controller
     }
 
 	public function actionFormu(){
-	$table = new GASTOS;
-	$model = $table->find()->all();
-	return $this->render("formu",["model"=> $model]);
+		PermisosController::permisoDocenteDirectorDecano();
+		$table = new GASTOS;
+		//$model = $table->find()->all(); //RAMÓN
+
+		$model = $table -> findBySql("SELECT DISTINCT G.*
+										FROM GASTOS G, VIAJE J, USUARIO U, SOLICITUD_DE_VIAJE S
+										WHERE G.ID_VIAJE = J.ID_VIAJE
+										AND J.ID_VIAJE = S.ID_VIAJE
+										AND S.ID_USUARIO =".Yii::$app -> user -> identity -> ID_USUARIO) -> all(); //MARCOS
+
+		return $this->render("formu",["model"=> $model]);
 	}
-	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*FIN PARTE RAMÓN 2*/
 	public function actionSaludar(){
 		$saludar = "Hola mundo";
 		return $this->render("saludar", ["saludar" => $saludar]);
@@ -123,7 +154,7 @@ class SiteController extends Controller
 			$mpdf = new mPDF;
 			$connection = new \yii\db\Connection(Yii::$app->db);
 			$connection -> open();
-$str = '<table border=0 cellspacing=0 cellpadding=2><tbody><tr><td><img src="http://www.ubiobio.cl/mcc/images/ubbdescargagradientesolo.png"/></td><td><h1>RENDICION DE GASTOS</h1><br>Fecha: '.date("d-m-Y").'</td></tr></table>';
+			$str = '<table border=0 cellspacing=0 cellpadding=2><tbody><tr><td><img src="http://www.ubiobio.cl/mcc/images/ubbdescargagradientesolo.png"/></td><td><h1>RENDICION DE GASTOS</h1><br>Fecha: '.date("d-m-Y").'</td></tr></table>';
 $mpdf -> WriteHTML($str);
 ///////////////////////////////////////////////////////////////////
 			$sql = "Select ID_SOLICITUD, ID_TIPO_DE_VIAJE, ID_VIAJE, FECHA_SOLICITUD, CUERPO_SOLICITUD from SOLICITUD_DE_VIAJE where ID_SOLICITUD=".$ID_SOLICITUD;
@@ -304,6 +335,7 @@ $mpdf -> WriteHTML($str);
 	}
 	/* INICIO PARTE DE RAÚL. */
 	public function actionCrearTViaje(){
+		PermisosController::permisoAdministrador();
 		$model = new TipoViajeForm;
 		$msg = null;
 		if($model->load(Yii::$app->request->post()))
@@ -333,6 +365,7 @@ $mpdf -> WriteHTML($str);
 	
 	public function actionVerTViaje()
 	{
+		PermisosController::permisoAdministrador();
 		$table = new TipoViaje;
 		$msg = null;
 		$model = $table->find()->all();
@@ -341,6 +374,7 @@ $mpdf -> WriteHTML($str);
 	
 	public function actionBorrarTViaje()
 	{
+		PermisosController::permisoAdministrador();
 		$msg = null;
 		if(Yii::$app->request->post())
 		{
@@ -369,6 +403,7 @@ $mpdf -> WriteHTML($str);
 	
 	public function actionEditarTViaje()
 	{
+		PermisosController::permisoAdministrador();
 		$model = new TipoViajeForm;
 		$msg = null;
 		if($model->load(Yii::$app->request->post()))
@@ -439,6 +474,7 @@ $mpdf -> WriteHTML($str);
 
 	public function actionUpdate()
 	{
+		PermisosController::permisoDocenteDirectorDecano();
 		$model = new FormGastos;
 		$msg = null;
 		
@@ -447,9 +483,15 @@ $mpdf -> WriteHTML($str);
 			if($model->validate())
 			{
 				
-				$table = Gastos::findOne($model->ID_GASTO);
+				//$table = Gastos::findOne($model->ID_GASTO); //RAMÓN
+				$table = Gastos::findBySql("SELECT DISTINCT G.*
+										FROM GASTOS G, VIAJE J, USUARIO U, SOLICITUD_DE_VIAJE S
+										WHERE G.ID_VIAJE = J.ID_VIAJE
+										AND J.ID_VIAJE = S.ID_VIAJE AND G.ID_GASTO = ".$model -> ID_GASTO.
+										" AND S.ID_USUARIO =".Yii::$app -> user -> identity -> ID_USUARIO) -> one(); //Marcos
 				//var_dump(isset($model));
 				//print_r($model);
+				if(!$table) throw new UnauthorizedHttpException;
 				if($table)
 				{
 					//$table->ID_GASTO = $model->ID_GASTO;
@@ -471,7 +513,12 @@ $mpdf -> WriteHTML($str);
 				{
 					$msg = "El Gasto seleccionado no ha sido encontrado";
 				}$table = new Gastos;
-				$model = $table->find()->all();
+				//$model = $table->find()->all(); //Ramon
+				$model = $table -> findBySql("SELECT DISTINCT G.*
+										FROM GASTOS G, VIAJE J, USUARIO U, SOLICITUD_DE_VIAJE S
+										WHERE G.ID_VIAJE = J.ID_VIAJE
+										AND J.ID_VIAJE = S.ID_VIAJE
+										AND S.ID_USUARIO =".Yii::$app -> user -> identity -> ID_USUARIO) -> all(); //MARCOS
 				return $this->render("view", ["model" => $model, 'msg' => $msg]);
 			}
 			else
@@ -485,7 +532,12 @@ $mpdf -> WriteHTML($str);
 			$ID_GASTO = Html::encode($_GET["ID_GASTO"]);
 			if ((int) $ID_GASTO)
 			{
-				$table = Gastos::findOne($ID_GASTO);
+				$table = Gastos::findBySql("SELECT DISTINCT G.*
+										FROM GASTOS G, VIAJE J, USUARIO U, SOLICITUD_DE_VIAJE S
+										WHERE G.ID_VIAJE = J.ID_VIAJE
+										AND J.ID_VIAJE = S.ID_VIAJE AND G.ID_GASTO = ".$ID_GASTO.
+										" AND S.ID_USUARIO =".Yii::$app -> user -> identity -> ID_USUARIO) -> one(); //Marcos
+        		if(!$table) throw new UnauthorizedHttpException;
 				if($table)
 				{
 					$model->ID_GASTO = $table->ID_GASTO;
@@ -515,6 +567,7 @@ $mpdf -> WriteHTML($str);
 
 	public function actionDelete()
 	{
+		PermisosController::permisoDocenteDirectorDecano();
 		if(Yii::$app->request->post())
 		{
 			$ID_GASTO = Html::encode($_POST["ID_GASTO"]);
@@ -545,8 +598,14 @@ $mpdf -> WriteHTML($str);
 
 	
 	public function actionView(){
+		PermisosController::permisoDocenteDirectorDecano();
 		$table = new Gastos;
-		$model = $table->find()->all();
+		//$model = $table->find()->all(); //RAMÓN
+		$model = $table -> findBySql("SELECT DISTINCT G.*
+										FROM GASTOS G, VIAJE J, USUARIO U, SOLICITUD_DE_VIAJE S
+										WHERE G.ID_VIAJE = J.ID_VIAJE
+										AND J.ID_VIAJE = S.ID_VIAJE
+										AND S.ID_USUARIO =".Yii::$app -> user -> identity -> ID_USUARIO) -> all(); //MARCOS
 
 		
 		return $this->render("view",["model"=> $model]);
@@ -554,6 +613,7 @@ $mpdf -> WriteHTML($str);
 
 
 	public function actionCreate(){
+		PermisosController::permisoDocenteDirectorDecano();
 		$model = new FormGastos;
 		$msg = null;
 		if($model->load(Yii::$app->request->post()))
