@@ -18,7 +18,12 @@ use yii\helpers\Html;
 
 
 
-class UsuarioController extends controller{
+class UsuarioController extends Controller{
+
+	private function permiso($action){
+		
+
+	}
 
 	public function actionView(){
 

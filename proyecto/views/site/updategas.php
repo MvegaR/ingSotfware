@@ -9,7 +9,7 @@ use yii\helpers\Url;
 <h1>Cambiar estado gasto con id <?= Html::encode($_GET["ID_GASTO"]) ?></h1>
 
 <h3><?= $msg ?></h3>
-
+<div class="form-group">
 <?php $form = ActiveForm::begin([
     "method" => "post",
     'enableClientValidation' => true,
@@ -18,7 +18,7 @@ use yii\helpers\Url;
 
 <?= $form->field($model, "ID_GASTO")->input("hidden")->label(false) ?>
 
-<div class="form-group">
+
  <?= $form->field($model, "estadogasto")->input("number")->label("ID Estado Gasto") ?>   
 </div>
 

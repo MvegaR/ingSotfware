@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Url;
+use yii\helpers\Html;
 use app\models\TipoViajeForm;
 use app\models\Estadosolicitud;
 
@@ -19,6 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <td><strong>Descripci&#243;n</strong></td>
         <td><strong></strong></td>
         <td><strong></strong></td>
+        <td><strong></strong></td>
     </tr>
     <?php foreach($model as $row): ?>
     <tr>
@@ -30,10 +32,37 @@ $this->params['breadcrumbs'][] = $this->title;
         <td><?= $row->FECHA_SOLICITUD ?></td>
         <td width="400"><?= $row->CUERPO_SOLICITUD ?></td>
         <td><a href="<?= Url::toRoute(["solicitud/detalle", "ID_SOLICITUD" => $row->ID_SOLICITUD]) ?>">Ver Detalle</a></td>
-        <?php if($row->ID_ESTADO == "2") 
+        <?php if($row->ID_ESTADO == "2"){
                   echo '<td><a href="'.Url::toRoute(["site/pdf", "ID_SOLICITUD" => $row->ID_SOLICITUD]).'">Generar PDF</a></td>';
-              else
                   echo '<td><strong></strong></td>';
+              }
+              else{
+                  echo '<td><strong></strong></td>';
+        ?><td>
+            <a href="#" data-toggle="modal" data-target="#ID_SOLICITUD_<?= $row->ID_SOLICITUD ?>">Eliminar</a>
+            <div class="modal fade" role="dialog" aria-hidden="true" id="ID_SOLICITUD_<?= $row->ID_SOLICITUD ?>">
+                      <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                    <h4 class="modal-title">Eliminar Solicitud</h4>
+                              </div>
+                              <div class="modal-body">
+                                    <div class="alert alert-danger" role="alert">¿Realmente quiere eliminar la solicitud "<?= $row->ID_SOLICITUD ?>"?</div>
+                              </div>
+                              <div class="modal-footer">
+                              <?= Html::beginForm(Url::toRoute("solicitud/borrar-solicitud"), "POST") ?>
+                                    <input type="hidden" name="ID_SOLICITUD" value="<?= $row->ID_SOLICITUD ?>">
+                                    <input type="hidden" name="ID_VIAJE" value="<?= $row->ID_VIAJE ?>">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    <button type="submit" class="btn btn-primary">Eliminar</button>
+                              <?= Html::endForm() ?>
+                              </div>
+                            </div>
+                      </div>
+            </div>
+        </td><?php
+              }
         ?>
     </tr>
     <?php endforeach ?>

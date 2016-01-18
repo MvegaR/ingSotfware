@@ -123,11 +123,13 @@ class SiteController extends Controller
 			$mpdf = new mPDF;
 			$connection = new \yii\db\Connection(Yii::$app->db);
 			$connection -> open();
+$str = '<table border=0 cellspacing=0 cellpadding=2><tbody><tr><td><img src="http://www.ubiobio.cl/mcc/images/ubbdescargagradientesolo.png"/></td><td><h1>RENDICION DE GASTOS</h1><br>Fecha: '.date("d-m-Y").'</td></tr></table>';
+$mpdf -> WriteHTML($str);
 ///////////////////////////////////////////////////////////////////
 			$sql = "Select ID_SOLICITUD, ID_TIPO_DE_VIAJE, ID_VIAJE, FECHA_SOLICITUD, CUERPO_SOLICITUD from SOLICITUD_DE_VIAJE where ID_SOLICITUD=".$ID_SOLICITUD;
 			$command = $connection -> createCommand($sql);
 			$dataReader = $command -> query();
-			$str = "<h1>RENDICION DE GASTOS</h1><h2>- SOLICITUD:</h2><table border=1 cellspacing=0 cellpadding=2><tbody><tr><td>ID</td><td>FECHA SOLICITUD</td><td>CUERPO SOLICITUD</td></tr>";
+			$str = "<h2>- SOLICITUD:</h2><table border=1 cellspacing=0 cellpadding=2><tbody><tr><td>ID</td><td>FECHA SOLICITUD</td><td>CUERPO SOLICITUD</td></tr>";
 			$dos = 1;
 			foreach($dataReader as $row) {
 				$ID_TIPO_DE_VIAJE = $row->ID_TIPO_DE_VIAJE;
@@ -207,7 +209,10 @@ class SiteController extends Controller
 			
 			$mpdf -> WriteHTML($str);
 ///////////////////////////////////////////////////////////////////
-			$str = "<h2>- IMAGEN(ES) ASOCIADAS A CADA GASTO:</h2>";
+			$str = '<h2>- IMAGEN(ES) ASOCIADAS A CADA GASTO:</h2><p><img src="http://www.teacherclaudio.cl/wp-content/uploads/2014/07/Boleta_01.png"/></p>
+<p><img src="http://am-sur.com/am-sur/peru/selva-m/Oxapampa-notizen-d/003-busbillet-Lobato-9-okt-2008.gif"/></p>
+<p><img src="http://www.cosale.cl/wp-content/uploads/2013/10/boleta.jpg"/></p>
+<p><img src="https://www.reclamos.cl/files/boleta_1_0.jpg"/></p>';
 			$mpdf -> WriteHTML($str);
 ///////////////////////////////////////////////////////////////////
 			$mpdf -> Output();

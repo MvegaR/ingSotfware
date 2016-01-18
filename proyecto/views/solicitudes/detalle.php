@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<td><?= $modelusuario -> ID_USUARIO ?></td>
 	<td><?= $modelusuario -> NOMBRE_USUARIO ?></td>
 	<td><?= $modelusuario -> ID_DEPARTAMENTO ?></td>
-	<td><?= $modelusuario -> ROL ?></td>
+	<td><?= $modelusuario -> ID_ROL ?></td>
 	<td><?= $modelusuario -> EMAIL ?></td>
 </tr>
 

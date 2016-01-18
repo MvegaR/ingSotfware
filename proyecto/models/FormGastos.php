@@ -10,6 +10,7 @@ class FormGastos extends Model{
 public $ID_GASTO;
 public $id_viaje;
 public $nombregasto;
+public $estadogasto;
 public $montogasto;
 public $fechagasto;
 
