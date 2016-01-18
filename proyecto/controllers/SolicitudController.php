@@ -14,15 +14,17 @@ use yii\helpers\Html;
 class SolicitudController extends Controller{
 
     public function actionIndex(){
+        PermisosController::permisoDocenteDirectorDecano();
     	$tablesolicitud = new Solicitud;
         $msg = null;
-        $modelsolicitud = $tablesolicitud->find()->where(['ID_USUARIO' => 1])->all();
+        $modelsolicitud = $tablesolicitud->find()->where(['ID_USUARIO' => Yii::$app -> user -> identity -> ID_USUARIO])->all();
     	return $this->render('index', ['model' => $modelsolicitud, 'msg' => $msg]);
     }
 
 
     public function actionBorrarSolicitud()
     {
+        PermisosController::permisoDocenteDirectorDecano();
         $msg = null;
         if(Yii::$app->request->post())
         {
@@ -55,6 +57,7 @@ class SolicitudController extends Controller{
 
 
     public function actionDetalle(){
+        PermisosController::permisoDocenteDirectorDecano();
         if (Yii::$app->request->get("ID_SOLICITUD")){
             $ID_SOLICITUD = Html::encode($_GET["ID_SOLICITUD"]);
 	    if ((int) $ID_SOLICITUD){
@@ -74,6 +77,7 @@ class SolicitudController extends Controller{
     }
 
     public function actionCrear(){
+        PermisosController::permisoDocenteDirectorDecano();
         $model = new SolicitudMet;
         if($model->load(Yii::$app->request->post())){
             $tableviaje = new Viaje;
@@ -95,7 +99,7 @@ class SolicitudController extends Controller{
                 $viaje->delete();
                 $tablesolicitud = new Solicitud;
                 $msg = '<div class="alert alert-warning" role="alert"><strong>ERROR!</strong> No se envi&#243; la solicitud, ingrese datos v&#225;lidos.</div>';
-                $modelsolicitud = $tablesolicitud->find()->where(['ID_USUARIO' => 1])->all();
+                $modelsolicitud = $tablesolicitud->find()->where(['ID_USUARIO' => Yii::$app -> user -> identity -> ID_USUARIO])->all();
     	        return $this->render('index', ['model' => $modelsolicitud, 'msg' => $msg]);
             }
             if($model->check2 == 1){
@@ -113,7 +117,7 @@ class SolicitudController extends Controller{
                     $viaje->delete();
                     $tablesolicitud = new Solicitud;
                     $msg = '<div class="alert alert-danger" role="alert"><strong>ERROR!</strong> No se envi&#243; la solicitud, ingrese datos v&#225;lidos.</div>';
-                    $modelsolicitud = $tablesolicitud->find()->where(['ID_USUARIO' => 1])->all();
+                    $modelsolicitud = $tablesolicitud->find()->where(['ID_USUARIO' => Yii::$app -> user -> identity -> ID_USUARIO])->all();
     	            return $this->render('index', ['model' => $modelsolicitud, 'msg' => $msg]);
                 }
             }
@@ -132,7 +136,7 @@ class SolicitudController extends Controller{
                     $viaje->delete();
                     $tablesolicitud = new Solicitud;
                     $msg = '<div class="alert alert-danger" role="alert"><strong>ERROR!</strong> No se envi&#243; la solicitud, ingrese datos v&#225;lidos.</div>';
-                    $modelsolicitud = $tablesolicitud->find()->where(['ID_USUARIO' => 1])->all();
+                    $modelsolicitud = $tablesolicitud->find()->where(['ID_USUARIO' => Yii::$app -> user -> identity -> ID_USUARIO])->all();
     	            return $this->render('index', ['model' => $modelsolicitud, 'msg' => $msg]);
                 }
             }
@@ -151,7 +155,7 @@ class SolicitudController extends Controller{
                     $viaje->delete();
                     $tablesolicitud = new Solicitud;
                     $msg = '<div class="alert alert-danger" role="alert"><strong>ERROR!</strong> No se envi&#243; la solicitud, ingrese datos v&#225;lidos.</div>';
-                    $modelsolicitud = $tablesolicitud->find()->where(['ID_USUARIO' => 1])->all();
+                    $modelsolicitud = $tablesolicitud->find()->where(['ID_USUARIO' => Yii::$app -> user -> identity -> ID_USUARIO])->all();
     	            return $this->render('index', ['model' => $modelsolicitud, 'msg' => $msg]);
                 }
             }
@@ -175,7 +179,7 @@ class SolicitudController extends Controller{
                 }
             }
             $tablesolicitud = new Solicitud;
-            $tablesolicitud->ID_USUARIO = 1;
+            $tablesolicitud->ID_USUARIO = Yii::$app -> user -> identity -> ID_USUARIO;
             $tablesolicitud->ID_TIPO_DE_VIAJE = $model->idtipoviaje;
             $tablesolicitud->ID_VIAJE = $ultimoidviaje;
             $tablesolicitud->FECHA_SOLICITUD = date("Y-m-d H:i:s");
@@ -184,7 +188,7 @@ class SolicitudController extends Controller{
             $tablesolicitud->insert();
     	    $tablesolicitud = new Solicitud;
             $msg = '<div class="alert alert-success" role="alert"><strong>Enviada!</strong> Solicitud enviada.</div>';
-            $modelsolicitud = $tablesolicitud->find()->where(['ID_USUARIO' => 1])->all();
+            $modelsolicitud = $tablesolicitud->find()->where(['ID_USUARIO' => Yii::$app -> user -> identity -> ID_USUARIO])->all();
     	    return $this->render('index', ['model' => $modelsolicitud, 'msg' => $msg]);
     	}else{
             $msg = null;

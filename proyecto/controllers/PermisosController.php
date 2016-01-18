@@ -13,7 +13,7 @@ class PermisosController extends Controller{
 		}
 		$rol = (ROL::findOne(Yii::$app -> user -> identity -> ID_ROL) -> ROL);
 		if( $rol != "Administrador"){
-			throw new UnauthorizedHttpException;
+			throw new UnauthorizedHttpException("Su rol de usuario no tiene los privilegios necesarios para realizar esta operación.");
 		}
 
 	}
@@ -24,7 +24,7 @@ class PermisosController extends Controller{
 		}
 		$rol = (ROL::findOne(Yii::$app -> user -> identity -> ID_ROL) -> ROL);
 		if( $rol != "Docente"){
-			throw new UnauthorizedHttpException;
+			throw new UnauthorizedHttpException("Su rol de usuario no tiene los privilegios necesarios para realizar esta operación.");
 		}
 
 	}
@@ -35,7 +35,7 @@ class PermisosController extends Controller{
 		}
 		$rol = (ROL::findOne(Yii::$app -> user -> identity -> ID_ROL) -> ROL);
 		if( $rol != "Decano"){
-			throw new UnauthorizedHttpException;
+			throw new UnauthorizedHttpException("Su rol de usuario no tiene los privilegios necesarios para realizar esta operación.");
 		}
 
 	}
@@ -47,7 +47,7 @@ class PermisosController extends Controller{
 		}
 		$rol = (ROL::findOne(Yii::$app -> user -> identity -> ID_ROL) -> ROL);
 		if( $rol != "Director"){
-			throw new UnauthorizedHttpException;
+			throw new UnauthorizedHttpException("Su rol de usuario no tiene los privilegios necesarios para realizar esta operación.");
 		}
 
 	}
@@ -59,7 +59,7 @@ class PermisosController extends Controller{
 		}
 		$rol = (ROL::findOne(Yii::$app -> user -> identity -> ID_ROL) -> ROL);
 		if( $rol != "Docente" && $rol != "Director"){
-			throw new UnauthorizedHttpException;
+			throw new UnauthorizedHttpException("Su rol de usuario no tiene los privilegios necesarios para realizar esta operación.");
 		}
 
 	}
@@ -71,7 +71,7 @@ class PermisosController extends Controller{
 		}
 		$rol = (ROL::findOne(Yii::$app -> user -> identity -> ID_ROL) -> ROL);
 		if( $rol != "Docente" && $rol != "Decano"){
-			throw new UnauthorizedHttpException;
+			throw new UnauthorizedHttpException("Su rol de usuario no tiene los privilegios necesarios para realizar esta operación.");
 		}
 
 	}
@@ -83,7 +83,7 @@ class PermisosController extends Controller{
 		}
 		$rol = (ROL::findOne(Yii::$app -> user -> identity -> ID_ROL) -> ROL);
 		if( $rol != "Docente" && $rol != "Director" && $rol != "Decano"){
-			throw new UnauthorizedHttpException;
+			throw new UnauthorizedHttpException("Su rol de usuario no tiene los privilegios necesarios para realizar esta operación.");
 		}
 
 	}

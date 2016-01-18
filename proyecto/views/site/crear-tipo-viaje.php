@@ -3,6 +3,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
+
 $this->title = 'Crear Tipo de Viaje';
 $this->params['breadcrumbs'][] = ["label" => "Lista de Tipos de Viaje", "url" => ["site/ver-t-viaje"]];
 $this->params['breadcrumbs'][] = $this->title;

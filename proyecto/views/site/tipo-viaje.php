@@ -4,6 +4,7 @@ use yii\helpers\Html;
 
 $this->title = 'Tipos de Viaje';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 
 <h3>Lista de Tipos de Viaje</h3>

@@ -7,6 +7,7 @@ $this->title = 'Editar Tipo de Viaje';
 $this->params['breadcrumbs'][] = ["label" => "Lista de Tipos de Viaje", "url" => ["site/ver-t-viaje"]];
 $this->params['breadcrumbs'][] = $this->title;
 
+
 ?>
 
 <h1>Editar Tipo de Viaje</h1>
