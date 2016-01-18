@@ -3,11 +3,8 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\GastosasociadoSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Gastosasociados';
+$this->title = 'Gastos Asociados';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="gastosasociados-index">
@@ -16,12 +13,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Gastosasociados', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Crear Gasto asociado', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 

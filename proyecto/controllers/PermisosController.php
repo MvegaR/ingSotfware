@@ -9,7 +9,7 @@ class PermisosController extends Controller{
 	public static function permisoAdministrador(){
 
 		if(Yii::$app->user->isGuest){
-			return Controller::redirect(["site/login"]);
+			throw new UnauthorizedHttpException("Debe iniciar sesión para realizar esta operación.");
 		}
 		$rol = (ROL::findOne(Yii::$app -> user -> identity -> ID_ROL) -> ROL);
 		if( $rol != "Administrador"){
@@ -21,7 +21,7 @@ class PermisosController extends Controller{
 	public static function permisoDocente(){
 
 		if(Yii::$app->user->isGuest){
-			return Controller::redirect(["site/login"]);
+			throw new UnauthorizedHttpException("Debe iniciar sesión para realizar esta operación.");
 		}
 		$rol = (ROL::findOne(Yii::$app -> user -> identity -> ID_ROL) -> ROL);
 		if( $rol != "Docente"){
@@ -33,7 +33,7 @@ class PermisosController extends Controller{
 	public static function permisoDecano(){
 
 		if(Yii::$app->user->isGuest){
-			return Controller::redirect(["site/login"]);
+			throw new UnauthorizedHttpException("Debe iniciar sesión para realizar esta operación.");
 		}
 		$rol = (ROL::findOne(Yii::$app -> user -> identity -> ID_ROL) -> ROL);
 		if( $rol != "Decano"){
@@ -45,7 +45,7 @@ class PermisosController extends Controller{
 	public static function permisoDirector(){
 
 		if(Yii::$app->user->isGuest){
-			return Controller::redirect(["site/login"]);
+			throw new UnauthorizedHttpException("Debe iniciar sesión para realizar esta operación.");
 		}
 		$rol = (ROL::findOne(Yii::$app -> user -> identity -> ID_ROL) -> ROL);
 		if( $rol != "Director"){
@@ -57,7 +57,7 @@ class PermisosController extends Controller{
 	public static function permisoDocenteDirector(){
 
 		if(Yii::$app->user->isGuest){
-			return Controller::redirect(["site/login"]);
+			throw new UnauthorizedHttpException("Debe iniciar sesión para realizar esta operación.");
 		}
 		$rol = (ROL::findOne(Yii::$app -> user -> identity -> ID_ROL) -> ROL);
 		if( $rol != "Docente" && $rol != "Director"){
@@ -70,7 +70,7 @@ class PermisosController extends Controller{
 	public static function permisoDocenteDecano(){
 
 		if(Yii::$app->user->isGuest){
-			return Controller::redirect(["site/login"]);
+			throw new UnauthorizedHttpException("Debe iniciar sesión para realizar esta operación.");
 		}
 		$rol = (ROL::findOne(Yii::$app -> user -> identity -> ID_ROL) -> ROL);
 		if( $rol != "Docente" && $rol != "Decano"){
@@ -83,7 +83,7 @@ class PermisosController extends Controller{
 	public static function permisoDirectorDecano(){
 
 		if(Yii::$app->user->isGuest){
-			return Controller::redirect(["site/login"]);
+			throw new UnauthorizedHttpException("Debe iniciar sesión para realizar esta operación.");
 		}
 		$rol = (ROL::findOne(Yii::$app -> user -> identity -> ID_ROL) -> ROL);
 		if( $rol != "Director" && $rol != "Decano"){
@@ -96,7 +96,7 @@ class PermisosController extends Controller{
 	public static function permisoDocenteDirectorDecano(){
 
 		if(Yii::$app->user->isGuest){
-			return Controller::redirect(["site/login"]);
+			throw new UnauthorizedHttpException("Debe iniciar sesión para realizar esta operación.");
 		}
 		$rol = (ROL::findOne(Yii::$app -> user -> identity -> ID_ROL) -> ROL);
 		if( $rol != "Docente" && $rol != "Director" && $rol != "Decano"){

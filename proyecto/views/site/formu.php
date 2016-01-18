@@ -2,6 +2,7 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
+use app\models\Estadogasto;
 ?>
 
 <h1> Lista de gastos </h1>
@@ -19,7 +20,7 @@ use yii\helpers\Html;
     <tr>
         <td><?= $row->ID_GASTO ?></td>
         <td><?= $row->ID_VIAJE ?></td>
-        <td><?= $row->ID_ESTADO_GASTO ?></td>
+        <td><?= Estadogasto::findOne($row->ID_ESTADO_GASTO) -> ESTADO_GASTO?></td>
         <td><?= $row->NOMBRE_GASTO ?></td>
         <td><?= $row->MONTO_GASTO ?></td>
         <td><?= $row->FECHA_GASTO ?></td>

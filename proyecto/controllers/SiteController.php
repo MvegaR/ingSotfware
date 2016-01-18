@@ -41,14 +41,16 @@ class SiteController extends Controller
         	$table = Gastos::findBySql("SELECT DISTINCT G.*
 										FROM GASTOS G, VIAJE J, USUARIO U, SOLICITUD_DE_VIAJE S
 										WHERE G.ID_VIAJE = J.ID_VIAJE
-										AND J.ID_VIAJE = S.ID_VIAJE AND G.ID_GASTO = ".$model -> ID_GASTO.
+										AND J.ID_VIAJE = S.ID_VIAJE AND G.ID_GASTO = ".$_GET["ID_GASTO"].
 										" AND S.ID_USUARIO =".Yii::$app -> user -> identity -> ID_USUARIO) -> one();
 
         	
         	if(!$table) throw new UnauthorizedHttpException;
 
 			$model -> ID_GASTO = $table -> ID_GASTO;
+
 			$model -> id_viaje = $table -> ID_VIAJE; 
+
 			//porque falla hay que hacer esto, no sé por qué:
 			$model -> estadogasto = (int)Yii::$app->request->post()["FormGastos"]["estadogasto"];
 			$model -> nombregasto = $table -> NOMBRE_GASTO;
@@ -365,7 +367,7 @@ $mpdf -> WriteHTML($str);
 	
 	public function actionVerTViaje()
 	{
-		PermisosController::permisoAdministrador();
+		
 		$table = new TipoViaje;
 		$msg = null;
 		$model = $table->find()->all();

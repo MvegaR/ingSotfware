@@ -8,9 +8,9 @@ use yii\data\ActiveDataProvider;
 use app\models\Gastosasociados;
 
 /**
- * GastosasociadoSearch represents the model behind the search form about `app\models\Gastosasociados`.
+ * GastosasociadosSearch represents the model behind the search form about `app\models\Gastosasociados`.
  */
-class GastosasociadoSearch extends Gastosasociados
+class GastosasociadosSearch extends Gastosasociados
 {
     /**
      * @inheritdoc

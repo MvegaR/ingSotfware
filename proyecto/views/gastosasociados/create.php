@@ -3,11 +3,9 @@
 use yii\helpers\Html;
 
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Gastosasociados */
 
-$this->title = 'Create Gastosasociados';
-$this->params['breadcrumbs'][] = ['label' => 'Gastosasociados', 'url' => ['index']];
+$this->title = 'Crear Gastos Asociados';
+$this->params['breadcrumbs'][] = ['label' => 'Gastos Asociados', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="gastosasociados-create">

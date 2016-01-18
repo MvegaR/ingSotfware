@@ -4,15 +4,15 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Gastosasociados;
-use app\models\GastosasociadoSearch;
+use app\models\GastosasociadosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * GastosasociadoController implements the CRUD actions for Gastosasociados model.
+ * GastosasociadosController implements the CRUD actions for Gastosasociados model.
  */
-class GastosasociadoController extends Controller
+class GastosasociadosController extends Controller
 {
     public function behaviors()
     {
@@ -33,7 +33,7 @@ class GastosasociadoController extends Controller
     public function actionIndex()
     {
         PermisosController::permisoDocenteDirectorDecano();
-        $searchModel = new GastosasociadoSearch();
+        $searchModel = new GastosasociadosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -62,7 +62,7 @@ class GastosasociadoController extends Controller
      */
     public function actionCreate()
     {
-        PermisosController::permisoAdministrador();
+         PermisosController::permisoAdministrador();
         $model = new Gastosasociados();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -82,7 +82,7 @@ class GastosasociadoController extends Controller
      */
     public function actionUpdate($id)
     {
-        PermisosController::permisoAdministrador();
+         PermisosController::permisoAdministrador();
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -101,8 +101,9 @@ class GastosasociadoController extends Controller
      * @return mixed
      */
     public function actionDelete($id)
+
     {
-        PermisosController::permisoAdministrador();
+         PermisosController::permisoAdministrador();
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

@@ -2,13 +2,12 @@
 
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Gastosasociados */
 
-$this->title = 'Update Gastosasociados: ' . ' ' . $model->ID_GASTO_ASOCIADO;
-$this->params['breadcrumbs'][] = ['label' => 'Gastosasociados', 'url' => ['index']];
+
+$this->title = 'Actualizar Gastos Asociados con ID: ' . ' ' . $model->ID_GASTO_ASOCIADO;
+$this->params['breadcrumbs'][] = ['label' => 'Gastos Asociados', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->ID_GASTO_ASOCIADO, 'url' => ['view', 'id' => $model->ID_GASTO_ASOCIADO]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Actualizar';
 ?>
 <div class="gastosasociados-update">
 

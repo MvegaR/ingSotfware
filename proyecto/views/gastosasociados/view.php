@@ -3,11 +3,9 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Gastosasociados */
 
 $this->title = $model->ID_GASTO_ASOCIADO;
-$this->params['breadcrumbs'][] = ['label' => 'Gastosasociados', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Gastos Asociados', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="gastosasociados-view">
@@ -15,11 +13,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->ID_GASTO_ASOCIADO], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->ID_GASTO_ASOCIADO], [
+        <?= Html::a('Actualizar', ['update', 'id' => $model->ID_GASTO_ASOCIADO], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Borrar', ['delete', 'id' => $model->ID_GASTO_ASOCIADO], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => '¿Está seguro que desea borrar este Gasto?',
                 'method' => 'post',
             ],
         ]) ?>

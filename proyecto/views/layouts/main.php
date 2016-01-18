@@ -33,6 +33,7 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Inicio', 'url' => ['/site/index']],
+            ['label' => 'Ver tipos de viaje', 'url' => ['/site/ver-t-viaje']],
              
                 ['label' => 'Iniciar sesión', 'url' => ['/site/login']],
         ],
@@ -61,8 +62,10 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Inicio', 'url' => ['/site/index']],
             ['label' => 'Realizar solicitud', 'url' => ['/solicitud/index']],
-            ['label' => 'Gestion de gastos', 'url' => ['/site/view']],
+            ['label' => 'Gestion sus gastos', 'url' => ['/site/view']],
+            ['label' => 'Ver tipos de viaje', 'url' => ['/site/ver-t-viaje']],
             ['label' => 'Evaluar solicitudes', 'url' => ['/solicitudes/view']],
+            ['label' => 'Evaluar gastos', 'url' => ['/site/formu']],
                 [
                     'label' => 'Salir (' . Yii::$app->user->identity->NOMBRE_USUARIO . ')',
                     'url' => ['/site/logout'],
@@ -78,8 +81,10 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Inicio', 'url' => ['/site/index']],
             ['label' => 'Realizar solicitud', 'url' => ['/solicitud/index']],
-             ['label' => 'Gestion de gastos', 'url' => ['/site/view']],
+             ['label' => 'Gestion sus gastos', 'url' => ['/site/view']],
+             ['label' => 'Ver tipos de viaje', 'url' => ['/site/ver-t-viaje']],
             ['label' => 'Evaluar solicitudes', 'url' => ['/solicitudes/view']],
+            ['label' => 'Evaluar gastos', 'url' => ['/site/formu']],
                 [
                     'label' => 'Salir (' . Yii::$app->user->identity->NOMBRE_USUARIO . ')',
                     'url' => ['/site/logout'],
@@ -95,7 +100,8 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Inicio', 'url' => ['/site/index']],
             ['label' => 'Realizar solicitud', 'url' => ['/solicitud/index']],
-            ['label' => 'Gestion de gastos', 'url' => ['/site/view']],
+            ['label' => 'Gestion sus gastos', 'url' => ['/site/view']],
+            ['label' => 'Ver tipos de viaje', 'url' => ['/site/ver-t-viaje']],
            
                 [
                     'label' => 'Salir (' . Yii::$app->user->identity->NOMBRE_USUARIO . ')',

@@ -13,6 +13,7 @@ $this->title = 'Declaración y solicitud de viajes';
         <p class="lead">Sistema administrativo web de rendición de gastos de viaje para los departamentos de la Universidad del Bío-Bío</p>
 
         
+        
     </div>
     <div class="list-group-item center">
 <a href="<?= Url::toRoute("site/view") ?>" class="list-group-item">Ver lista gastos. (Ramón)</a><br>

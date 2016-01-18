@@ -26,9 +26,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <tr>
         <td><?= $row->ID_SOLICITUD; ?></td>
         <td><?= Estadosolicitud::findOne($row -> ID_ESTADO) -> ESTADO; ?></td>
-        <!--<td><?= $row->ID_TIPO_DE_VIAJE ?></td>-->
-        <td><?= TipoViajeForm::nombrePorID($row->ID_TIPO_DE_VIAJE)->NOMBRE_TIPO_DE_VIAJE; ?></td>
-        <!--<td>$<?= TipoViajeForm::nombrePorID($row->ID_TIPO_DE_VIAJE)->MONTO_MAXIMO; ?></td> -->
+        
+        <td><?php if(TipoViajeForm::nombrePorID($row->ID_TIPO_DE_VIAJE))echo TipoViajeForm::nombrePorID($row->ID_TIPO_DE_VIAJE)->NOMBRE_TIPO_DE_VIAJE; ?></td>
+       
         <td><?= $row->FECHA_SOLICITUD ?></td>
         <td width="400"><?= $row->CUERPO_SOLICITUD ?></td>
         <td><a href="<?= Url::toRoute(["solicitud/detalle", "ID_SOLICITUD" => $row->ID_SOLICITUD]) ?>">Ver Detalle</a></td>
